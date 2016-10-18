@@ -6,7 +6,7 @@
 /**
  * Main AngularJS Web Application
  */
-var app = angular.module('tutorialWebApp', [
+var app = angular.module('rylew', [
   'ngRoute'
 ]);
 
@@ -32,6 +32,15 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
  // console.log("Page Controller reporting for duty.");
 
 
+
+
+});
+
+
+app.controller('FooterCtrl', function ($scope/*, $location, $http */) {
+
+
+    scope.year = new Date().getFullYear();
 
 
 });
