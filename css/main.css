@@ -127,6 +127,16 @@ footer {
     margin: 50px 0;
 }
 
+
+.navbar{
+    background-color:white;
+}
+
+
+img.myimage{
+    float:left;
+}
+
 /* Responsive Styles */
 /*@media (max-width: 767px) {
 

@@ -18,7 +18,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     // Home
     .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
     // Pages
-    .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
+    .when("/about", { templateUrl: "partials/about.html", controller: "PageCtrl" })
+    .when("/projects", { templateUrl: "partials/projects.html", controller: "PageCtrl" })
+    .when("/places", { templateUrl: "partials/places.html", controller: "PageCtrl" })
     .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
     // else 404
     .otherwise("/404", {templateUrl: "partials/404.html", controller: "PageCtrl"});
@@ -40,7 +42,7 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
 app.controller('FooterCtrl', function ($scope) {
 
 
-    $scope.year = new Date().getFullYear();
+    $scope.year = Date();
 
 
 });
