@@ -37,10 +37,10 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
 });
 
 
-app.controller('FooterCtrl', function ($scope/*, $location, $http */) {
+app.controller('FooterCtrl', function ($scope) {
 
 
-    scope.year = new Date().getFullYear();
+    $scope.year = new Date().getFullYear();
 
 
 });
