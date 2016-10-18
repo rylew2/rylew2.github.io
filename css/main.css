@@ -128,10 +128,9 @@ footer {
 }
 
 
-.navbar{
-    background-color:white;
+.navbar-inverse {
+    background-image: -webkit-linear-gradient(top,#e1e1e1 0,#e1e1e1 100%) !important;
 }
-
 
 img.myimage{
     float:left;
