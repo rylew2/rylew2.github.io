@@ -1,81 +1,150 @@
-﻿
-/* Wrapper */
-.icon-button {
-	background-color: white;
-	border-radius: 3.6rem;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 2.0rem;
-	height: 3.6rem;
-	line-height: 3.6rem;
-	margin: 0 5px;
-	position: relative;
-	text-align: center;
-	-webkit-user-select: none;
-	   -moz-user-select: none;
-	    -ms-user-select: none;
-	        user-select: none;
-	width: 3.6rem;
+﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+
+.social-icons {
+  list-style-type: none;
+  margin: 0 auto 20px;
+  padding: 0;
+  width: 250px;
+  height: 100px;
 }
 
-/* Circle */
-.icon-button span {
-	border-radius: 0;
-	display: block;
-	height: 0;
-	left: 50%;
-	margin: 0;
-	position: absolute;
-	top: 50%;
-	-webkit-transition: all 0.3s;
-	   -moz-transition: all 0.3s;
-	     -o-transition: all 0.3s;
-	        transition: all 0.3s;
-	width: 0;
-}
-.icon-button:hover span {
-	width: 3.6rem;
-	height: 3.6rem;
-	border-radius: 3.6rem;
-	margin: -1.8rem;
-}
-.twitter span {
-	background-color: #4099ff;
-}
-.facebook span {
-	background-color: #3B5998;
-}
-.google-plus span {
-	background-color: #db5a3c;
+.tab {
+  margin-right: 10px;
+  border-radius: 0 0 25px 25px;
+  float: left;
 }
 
-/* Icons */
-.icon-button i {
-	background: none;
-	color: white;
-	height: 3.6rem;
-	left: 0;
-	line-height: 3.6rem;
-	position: absolute;
-	top: 0;
-	-webkit-transition: all 0.3s;
-	   -moz-transition: all 0.3s;
-	     -o-transition: all 0.3s;
-	        transition: all 0.3s;
-	width: 3.6rem;
-	z-index: 10;
+.circle {
+  padding: 10px 10px;
+  width: 20px;
+  font-size: 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 20px;
+  border: solid 1px;
 }
-.icon-button .icon-twitter {
-	color: #4099ff;
+
+.fa-facebook {
+  color: hsl(221, 44%, 41%);
+  border-color: hsl(221, 44%, 41%);
 }
-.icon-button .icon-facebook {
-	color: #3B5998;
+
+.fa-facebook:hover {
+  background-color: hsl(221, 44%, 41%);
 }
-.icon-button .icon-google-plus {
-	color: #db5a3c;
+
+.fa-twitter {
+  color: hsl(195, 100%, 60%);
+  border-color: hsl(195, 100%, 60%);
 }
-.icon-button:hover .icon-twitter,
-.icon-button:hover .icon-facebook,
-.icon-button:hover .icon-google-plus {
-	color: white;
+
+.fa-twitter:hover {
+  background-color: hsl(195, 100%, 60%);
+}
+
+.fa-google-plus {
+  color: hsl(7, 71%, 55%);
+  border-color: hsl(7, 71%, 55%);
+}
+
+.fa-google-plus:hover {
+  background-color: hsl(7, 71%, 55%);
+}
+
+.fa-linkedin {
+  color: hsl(199, 85%, 36%);
+  border-color: hsl(199, 85%, 36%);
+}
+
+.fa-linkedin:hover {
+  background-color: hsl(199, 85%, 36%);
+}
+
+.fa-facebook:hover, .fa-twitter:hover, .fa-google-plus:hover, .fa-linkedin:hover {
+  color: hsl(0, 0%, 100%);
+}
+
+.screen-reader {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+.shadow .tab {
+  background: none;
+}
+
+.shadow .circle {
+  box-shadow: 1px 1px 3px hsla(0, 0%, 0%, .4);
+}
+
+.shadow .fa-facebook,
+.shadow .fa-twitter,
+.shadow .fa-google-plus,
+.shadow .fa-linkedin {
+  border-color: hsl(0, 0%, 100%);
+  border: none;
+  padding: 11px;
+  
+}
+
+.squares .tab {
+  background: none;
+}
+
+.square {
+  padding: 9px 9px;
+  width: 20px;
+  font-size: 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.fa-facebook.square {
+  background-color: hsl(221, 44%, 41%);
+  border: 1px solid hsl(221, 44%, 41%);
+  color: #fff;
+}
+
+.fa-facebook.square:hover {
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(221, 44%, 41%);
+  color: hsl(221, 44%, 41%);
+}
+
+.fa-twitter.square {
+  background-color: hsl(195, 100%, 60%);
+  border: 1px solid hsl(195, 100%, 60%);
+  color: #fff;
+}
+
+.fa-twitter.square:hover {
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(195, 100%, 60%);
+  color: hsl(195, 100%, 60%);
+}
+
+.fa-google-plus.square {
+  background-color: hsl(7, 71%, 55%);
+  border: 1px solid hsl(7, 71%, 55%);
+  color: #fff;
+}
+
+.fa-google-plus.square:hover {
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(7, 71%, 55%);
+  color: hsl(7, 71%, 55%);
+}
+
+.fa-linkedin.square {
+  background-color: hsl(199, 85%, 36%);
+  border: 1px solid hsl(199, 85%, 36%);
+  color: #fff;
+}
+
+.fa-linkedin.square:hover {
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(199, 85%, 36%);
+  color: hsl(199, 85%, 36%);
 }
