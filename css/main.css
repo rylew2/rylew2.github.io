@@ -151,7 +151,7 @@ img.myimage{
 
 
 
-.site-footer { margin-top: 15px; border-top: 1px solid #bfe2e2; background: url("/img/blu_stripes.png"); font-family: brandon-grotesque, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+.site-footer { border-top: 1px solid #bfe2e2; background: url("/img/blu_stripes.png"); font-family: brandon-grotesque, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 .site-footer .disclaimer { font-size: .8em; max-width: 1000px; text-align: center; margin: 0 auto; vertical-align: middle; line-height: normal; padding: .6em 0 0 0; }
 .site-footer .copyright { text-align: center; font-size: 14px; max-width: 1000px; margin: 0 auto; padding: 1em; }
 
