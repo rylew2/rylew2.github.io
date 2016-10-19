@@ -1,4 +1,115 @@
-﻿@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+﻿/*@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");*/
+
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css");
+
+
+
+/* Facebook*/
+.fa-facebook {
+  color: hsl(221, 44%, 41%);
+  border-color: hsl(221, 44%, 41%);
+}
+
+.fa-facebook:hover {
+  background-color: hsl(221, 44%, 41%);
+}
+
+.fa-facebook:hover, .fa-twitter:hover, .fa-google-plus:hover, .fa-linkedin:hover {
+  color: hsl(0, 0%, 100%);
+}
+/*End Facebook*/
+
+
+/* LinkedIn*/
+.fa-linkedin {
+  color: hsl(199, 85%, 36%);
+  border-color: hsl(199, 85%, 36%);
+}
+
+.fa-linkedin:hover {
+  background-color: hsl(199, 85%, 36%);
+}
+/* End LinkedIn*/
+
+
+/* Vimeo*/
+.fa-vimeo{
+    color: /*hsl(0, 0%, 0%);*/ #44C0FD;
+  border-color: hsl(0, 0%, 100%);
+}
+
+.fa-vimeo:hover {
+  background-color:#000000;
+}
+/*End Vimeo*/
+
+
+/* Github */
+.fa-github {
+  color: #000000;
+  border-color: hsl(221, 44%, 41%);
+}
+
+.fa-github:hover {
+  background-color:#4078C0;
+}
+/* Github */
+
+/* Mail */
+.fa-envelope-o  {
+  color: #C8C8C8;
+  border-color: hsl(221, 44%, 41%);
+}
+
+.fa-envelope-o :hover {
+  background-color:#C8C8C8;
+}
+/* Mail */
+
+
+
+
+.screen-reader {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+.shadow .tab {
+  background: none;
+}
+
+.shadow .circle {
+  box-shadow: 1px 1px 3px hsla(0, 0%, 0%, .4);
+}
+
+.shadow .fa-facebook,
+.shadow .fa-twitter,
+.shadow .fa-google-plus,
+.shadow .fa-linkedin,
+.shadow .fa-vimeo,
+.shadow .fa-github,
+.shadow .fa-envelope-o 
+{
+  border-color: hsl(0, 0%, 100%) !important;
+  border: none;
+  padding: 0px;
+  height:21px;
+  width:23px;
+}
+
+.squares .tab {
+  background: none;
+}
+
+.square {
+  padding: 9px 9px;
+  width: 20px;
+  font-size: 20px;
+  text-align: center;
+  background: #fff;
+}
+
 
 
 .social-icons {
@@ -25,160 +136,9 @@
   border: solid 1px;
 }
 
-.fa-facebook {
-  color: hsl(221, 44%, 41%);
-  border-color: hsl(221, 44%, 41%);
-}
 
-.fa-facebook:hover {
-  background-color: hsl(221, 44%, 41%);
-}
+ul.social-icons{
+    height: 30px;
+    width:170px;
 
-.fa-twitter {
-  color: hsl(195, 100%, 60%);
-  border-color: hsl(195, 100%, 60%);
-}
-
-.fa-twitter:hover {
-  background-color: hsl(195, 100%, 60%);
-}
-
-.fa-google-plus {
-  color: hsl(7, 71%, 55%);
-  border-color: hsl(7, 71%, 55%);
-}
-
-.fa-google-plus:hover {
-  background-color: hsl(7, 71%, 55%);
-}
-
-.fa-linkedin {
-  color: hsl(199, 85%, 36%);
-  border-color: hsl(199, 85%, 36%);
-}
-
-.fa-linkedin:hover {
-  background-color: hsl(199, 85%, 36%);
-}
-
-.fa-facebook:hover, .fa-twitter:hover, .fa-google-plus:hover, .fa-linkedin:hover {
-  color: hsl(0, 0%, 100%);
-}
-
-
-.fa-vimeo {
-  color: hsl(221, 44%, 41%);
-  border-color: hsl(221, 44%, 41%);
-}
-
-.fa-vimeo:hover {
-  background-color: hsl(221, 44%, 41%);
-}
-
-
-
-.fa-github {
-  color: hsl(221, 44%, 41%);
-  border-color: hsl(221, 44%, 41%);
-}
-
-.fa-github:hover {
-  background-color: hsl(221, 44%, 41%);
-}
-
-
-.screen-reader {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-}
-
-.shadow .tab {
-  background: none;
-}
-
-.shadow .circle {
-  box-shadow: 1px 1px 3px hsla(0, 0%, 0%, .4);
-}
-
-.shadow .fa-facebook,
-.shadow .fa-twitter,
-.shadow .fa-google-plus,
-.shadow .fa-linkedin {
-  border-color: hsl(0, 0%, 100%);
-  border: none;
-  padding: 0px;
-  
-}
-
-.squares .tab {
-  background: none;
-}
-
-.square {
-  padding: 9px 9px;
-  width: 20px;
-  font-size: 20px;
-  text-align: center;
-  background: #fff;
-}
-
-.fa-facebook.square {
-  background-color: hsl(221, 44%, 41%);
-  border: 1px solid hsl(221, 44%, 41%);
-  color: #fff;
-}
-
-.fa-facebook.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(221, 44%, 41%);
-  color: hsl(221, 44%, 41%);
-}
-
-.fa-twitter.square {
-  background-color: hsl(195, 100%, 60%);
-  border: 1px solid hsl(195, 100%, 60%);
-  color: #fff;
-}
-
-.fa-twitter.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(195, 100%, 60%);
-  color: hsl(195, 100%, 60%);
-}
-
-.fa-google-plus.square {
-  background-color: hsl(7, 71%, 55%);
-  border: 1px solid hsl(7, 71%, 55%);
-  color: #fff;
-}
-
-.fa-google-plus.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(7, 71%, 55%);
-  color: hsl(7, 71%, 55%);
-}
-
-.fa-linkedin.square {
-  background-color: hsl(199, 85%, 36%);
-  border: 1px solid hsl(199, 85%, 36%);
-  color: #fff;
-}
-
-.fa-linkedin.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(199, 85%, 36%);
-  color: hsl(199, 85%, 36%);
-}
-
-.fa-vimeo.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(199, 85%, 36%);
-  color: hsl(199, 85%, 36%);
-}
-
-.fa-linkedin.square:hover {
-  background-color: hsl(0, 0%, 100%);
-  border-color: hsl(199, 85%, 36%);
-  color: hsl(199, 85%, 36%);
 }
