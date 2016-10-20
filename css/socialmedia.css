@@ -2,7 +2,11 @@
 
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css");
 
-
+.fa-facebook:hover, .fa-twitter:hover, .fa-vimeo:hover,
+.fa-google-plus:hover, .fa-linkedin:hover, 
+.fa-github:hover, .fa-envelope-o:hover {
+  color: hsl(0, 0%, 100%);
+ }
 
 /* Facebook*/
 .fa-facebook {
@@ -14,9 +18,6 @@
   background-color: hsl(221, 44%, 41%);
 }
 
-.fa-facebook:hover, .fa-twitter:hover, .fa-google-plus:hover, .fa-linkedin:hover {
-  color: hsl(0, 0%, 100%);
-}
 /*End Facebook*/
 
 
@@ -57,12 +58,12 @@
 
 /* Mail */
 .fa-envelope-o  {
-  color: #C8C8C8;
+  color: #000000;
   border-color: hsl(221, 44%, 41%);
 }
 
-.fa-envelope-o :hover {
-  background-color:#C8C8C8;
+.fa-envelope-o:hover {
+  background-color:hsla(231, 8%, 50%, 1);
 }
 /* Mail */
 
@@ -110,8 +111,6 @@
   background: #fff;
 }
 
-
-
 .social-icons {
   list-style-type: none;
   margin: 0 auto 20px;
@@ -131,14 +130,14 @@
   width: 20px;
   font-size: 20px;
   text-align: center;
-  background: #fff;
-  border-radius: 8px;
+  /* background: #fff; */
+  border-radius: 5px;
   border: solid 1px;
 }
 
 
 ul.social-icons{
     height: 30px;
-    width:170px;
+    width:175px;
 
 }

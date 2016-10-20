@@ -71,35 +71,6 @@ body {
     background-size: cover;
 }
 
-/* Social Icons Styles */
-.list-social-icons {
-    margin-bottom: 45px;
-}
-
-.tooltip-social a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.facebook-link a:hover {
-    color: #3b5998;
-}
-
-.linkedin a:hover {
-    color: #007fb1;
-}
-
-.github-link a:hover {
-    color: #cccccc;
-}
-
-.google-plus-link a:hover {
-    color: #d14836;
-}
-
-.vimeo-link a:hover {
-    color: #0087CB;
-}
 
 /* Service Page Styles */
 .service-icon {
@@ -140,27 +111,20 @@ img.myimage{
     float:left;
 }
 
-/* Responsive Styles */
-/*@media (max-width: 767px) {
-
-    .carousel {
-        height: 70%;
-        
-    }
-}*/
-
 
 
 .site-footer { border-top: 1px solid #54697E; background: url("/img/cork-wallet.png"); font-family: brandon-grotesque, HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 .site-footer .disclaimer { font-size: .8em; max-width: 1000px; text-align: center; margin: 0 auto; vertical-align: middle; line-height: normal; padding: .6em 0 0 0; }
 .site-footer .copyright { text-align: center; font-size: 14px; max-width: 1000px; margin: 0 auto; padding: 1em; }
 
-
-nav {
-    background: background: url("/img/cork-wallet.png");
+ 
+#mainNav {
+    background:  url("/img/snow.png") !important;
 }
 
-
+.footer#footer{
+    background: url("/img/snow.png");
+}
 
 .footer {
 	background: #F8F8F8;
@@ -208,17 +172,19 @@ nav {
 	background: #E3E3E3;
 	border-top: 1px solid #DDDDDD;
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 10px; 
 }
 .footer-bottom p.pull-left {
 	padding-top: 6px;
-}
+} 
 
-footer div.col-lg-2{
-	
+footer div.col-lg-2{	
 	margin-left : 10px ;
 	margin-right : 10px;
 }
 
 
+.site-footer .pull-left{
+    font-size: 10px;
+}
 
