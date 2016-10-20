@@ -71,35 +71,6 @@ body {
     background-size: cover;
 }
 
-/* Social Icons Styles */
-.list-social-icons {
-    margin-bottom: 45px;
-}
-
-.tooltip-social a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.facebook-link a:hover {
-    color: #3b5998;
-}
-
-.linkedin a:hover {
-    color: #007fb1;
-}
-
-.github-link a:hover {
-    color: #cccccc;
-}
-
-.google-plus-link a:hover {
-    color: #d14836;
-}
-
-.vimeo-link a:hover {
-    color: #0087CB;
-}
 
 /* Service Page Styles */
 .service-icon {
@@ -139,15 +110,6 @@ footer {
 img.myimage{
     float:left;
 }
-
-/* Responsive Styles */
-/*@media (max-width: 767px) {
-
-    .carousel {
-        height: 70%;
-        
-    }
-}*/
 
 
 
@@ -222,4 +184,7 @@ footer div.col-lg-2{
 }
 
 
+.site-footer .pull-left{
+    font-size: 10px;
+}
 
