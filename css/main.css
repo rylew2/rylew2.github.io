@@ -155,12 +155,14 @@ img.myimage{
 .site-footer .disclaimer { font-size: .8em; max-width: 1000px; text-align: center; margin: 0 auto; vertical-align: middle; line-height: normal; padding: .6em 0 0 0; }
 .site-footer .copyright { text-align: center; font-size: 14px; max-width: 1000px; margin: 0 auto; padding: 1em; }
 
-
-nav {
-    background: background: url("/img/cork-wallet.png");
+ 
+#mainNav {
+    background:  url("/img/snow.png") !important;
 }
 
-
+.footer#footer{
+    background: url("/img/snow.png");
+}
 
 .footer {
 	background: #F8F8F8;
@@ -214,8 +216,7 @@ nav {
 	padding-top: 6px;
 }
 
-footer div.col-lg-2{
-	
+footer div.col-lg-2{	
 	margin-left : 10px ;
 	margin-right : 10px;
 }
