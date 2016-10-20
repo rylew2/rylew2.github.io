@@ -2,7 +2,11 @@
 
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css");
 
-
+.fa-facebook:hover, .fa-twitter:hover, .fa-vimeo:hover,
+.fa-google-plus:hover, .fa-linkedin:hover, 
+.fa-github:hover, .fa-envelope-o:hover {
+  color: hsl(0, 0%, 100%);
+ }
 
 /* Facebook*/
 .fa-facebook {
@@ -14,11 +18,6 @@
   background-color: hsl(221, 44%, 41%);
 }
 
-.fa-facebook:hover, .fa-twitter:hover, .fa-vimeo:hover,
-.fa-google-plus:hover, .fa-linkedin:hover, 
-.fa-github:hover, .fa-envelope-o:hover {
-  color: hsl(0, 0%, 100%);
-}
 /*End Facebook*/
 
 
@@ -59,12 +58,12 @@
 
 /* Mail */
 .fa-envelope-o  {
-  color: #000;
+  color: #000000;
   border-color: hsl(221, 44%, 41%);
 }
 
-.fa-envelope-o :hover {
-  background-color:#d5d5d5;
+.fa-envelope-o:hover {
+  background-color:hsl(199, 85%, 36%);
 }
 /* Mail */
 
