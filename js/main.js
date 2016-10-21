@@ -157,7 +157,9 @@ $(document).on('click', '.navbar-collapse.in', function (e) {
     //Get user and repos for user
     var github = function ($http) {
         var getUser = function (username) {
-            return $http.get("https://api.github.com/users/" + username)
+            return $http.get("https://api.github.com/users/" + username +
+                "?client_id=e7adfd7bbde441943395&client_secr" +
+                "et=d17308a9270db6865271a66bf4198c0fdbf154d8")
                   .then(function (response) {
                       return response.data;
                   });

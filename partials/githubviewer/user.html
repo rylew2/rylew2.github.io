@@ -14,7 +14,7 @@
                     <a href="#/projects">Projects</a>
                 </li>
                 <li>
-                    Github Viewer: User
+                    Github Browser: User
                 </li>
             </ol>
         </div>
@@ -28,7 +28,7 @@
             <div>
                 <p ng-show="user.message">{{user.message}}</p>
                 <h2> GitHub username: {{user.login}}</h2>
-                <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto" />
+               
             </div>
 
             <b>Order:</b>
@@ -37,7 +37,7 @@
                 <option value="-stargazers_count">Stars desc</option>
                 <option value="+language">Language asc</option>
             </select>
-
+           
         </div> <!-- end div ng-show -->
 
 
@@ -63,6 +63,7 @@
                     <td>{{repo.language}}</td>
                 </tr>
             </tbody>
-        </table>
+        </table> <br/>
+        <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
     </div>
  </div>

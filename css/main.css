@@ -189,7 +189,7 @@ footer div.col-lg-2{
 }
 
 
-/* GitHub Viewer*/
+/* GitHub Browser*/
 .ghvmain{
     margin-top: 30px;
     margin-left: 30px;
@@ -198,7 +198,7 @@ footer div.col-lg-2{
     width: 215px;
 }
 
-.ghvuserphoto{
+.ghvphoto{
     height:10% !important;
     width: 10% !important;
 }
