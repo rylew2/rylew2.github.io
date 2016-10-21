@@ -202,3 +202,14 @@ footer div.col-lg-2{
     height:10% !important;
     width: 10% !important;
 }
+
+/* Contact Page Icon*/
+.contactPageIcon{
+    width: 42px !important;
+
+}
+
+.contactPageIconTab{
+    list-style:none;
+    
+}
