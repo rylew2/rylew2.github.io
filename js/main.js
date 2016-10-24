@@ -75,10 +75,7 @@ app.controller('FooterCtrl', function ($scope) {
 app.controller('MainController', function (
     $scope, $interval, $location, $routeParams) {
 
-
-
-        var onError = function (reason) {
-         
+        var onError = function (reason) {         
             $scope.error = "Could not fetch the data from GitHub";
         };
 
@@ -86,10 +83,6 @@ app.controller('MainController', function (
             // $log.info("Searching for " + username);
             $location.path("/ghv/user/" + username); 
         };  
-
-        //  $scope.username = "angular";
-        var x = 2;
-
 });
 
 
@@ -105,14 +98,11 @@ app.controller('RepoController', function (
         $scope.error = reason;
     };
 
-
     var reponame = $routeParams.reponame;
     var username = $routeParams.username;
 
     github.getRepoDetails(username, reponame)
     .then(onRepo, onError);
-
-
 });
 
 
