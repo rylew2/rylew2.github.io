@@ -47,9 +47,25 @@
         height: 260px;
     }
 
-    .legend{
-        padding-left:50px;
-    }
+   table{
+        width:250px;
+        text-align: center !important;
+   }
+   th{
+       height:40px;
+       text-align:center;
+       word-wrap:break-word;
+       padding-left:20px;
+       padding-right:20px;
+
+   }
+   .ghvmain input {
+       width:115px;
+   }
+
+   tr:hover{
+       background: #fff0a7;
+   }
 </style>
 
 
@@ -71,7 +87,7 @@
 
     var width = 960/2.5,
         height = 450/2.5,
-        radius = (Math.min(width, height) / 2) + 20;
+        radius = (Math.min(width, height) / 2) + 40;
 
     var pie = d3.layout.pie()
         .sort(null)
@@ -129,6 +145,8 @@
         .on("change", selectDataset);
 
     function selectDataset() {
+        
+
         var value = this.value;
         if (value == "total") {
             change(datasetTotal);
@@ -177,29 +195,29 @@
         slice.exit()
             .remove();
 
-        var legend = svg.selectAll('.legend')
-            .data(color.domain())
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-            .attr('transform', function (d, i) {
-                var height = legendRectSize + legendSpacing;
-                var offset = height * color.domain().length / 2;
-                var horz = -3 * legendRectSize;
-                var vert = i * height - offset;
-                return 'translate(' + horz + ',' + vert + ')';
-            });
+        //var legend = svg.selectAll('.legend')
+        //    .data(color.domain())
+        //    .enter()
+        //    .append('g')
+        //    .attr('class', 'legend')
+        //    .attr('transform', function (d, i) {
+        //        var height = legendRectSize + legendSpacing;
+        //        var offset = height * color.domain().length / 2;
+        //        var horz = -3 * legendRectSize;
+        //        var vert = i * height - offset;
+        //        return 'translate(' + horz + ',' + vert + ')';
+        //    });
 
-        legend.append('rect')
-            .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
-            .style('fill', color)
-            .style('stroke', color);
+        //legend.append('rect')
+        //    .attr('width', legendRectSize)
+        //    .attr('height', legendRectSize)
+        //    .style('fill', color)
+        //    .style('stroke', color);
 
-        legend.append('text')
-            .attr('x', legendRectSize + legendSpacing)
-            .attr('y', legendRectSize - legendSpacing)
-            .text(function (d) { return d; });
+        //legend.append('text')
+        //    .attr('x', legendRectSize + legendSpacing)
+        //    .attr('y', legendRectSize - legendSpacing)
+        //    .text(function (d) { return d; });
 
         /* ------- TEXT LABELS -------*/
 
@@ -273,6 +291,7 @@
     };
 
 
+  
 
 </script>
 
@@ -317,19 +336,18 @@
             <select ng-model="repoSortOrder">
                 <option value="+name">Name asc</option>
                 <option value="-stargazers_count">Stars desc</option>
-                <option value="+language">Language asc</option>
             </select>
            
         </div> <!-- end div ng-show -->
 
 
         <div class="col-md-3">
-            <table border=".5" ng-show="user">
+            <table border=".5" ng-show="user" style="width:300px;">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Stars</th>
-                        <th>Primary Language</th>
+                        <th style="width:160px;">Select to View Languages</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -342,20 +360,17 @@
                         </td>
                         <td>{{repo.stargazers_count | number}}</td>
                         <!-- number filter -->
-                        <td>{{repo.language}}</td>
+                        <!--<td>{{repo.language}}</td>-->
+                        <td><input class="languageRB" type="radio" name="dataset" id="dataset" value="{{repo.name}}" /></td>
                     </tr>
                 </tbody>
             </table> <br />
             <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
         </div>
         <div id="chart" class="col-md-9">
-            <form>
                 <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
                 <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
                 <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
-            </form>
-
-
         </div>
 
 

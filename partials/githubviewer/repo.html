@@ -282,7 +282,6 @@ svg{
         <div class="col-lg-12 ">
             <h1 class="page-header">
                 Projects
-
             </h1>
             <ol class="breadcrumb">
                 <li>
@@ -323,22 +322,18 @@ svg{
             <tbody>
                 <tr ng-repeat="user in repo.contributors">
                     <td><a href="#/ghv/user/{{user.login}}">{{user.login}}</a></td>
-
                     <td>
                         <img width="150px" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
                     </td>
-
-
                 </tr>
             </tbody>
         </table>
 
         <div id="chart" class="col-md-9">
-            <form>
+
                 <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
                 <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
                 <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
-            </form>
 
 
         </div>
