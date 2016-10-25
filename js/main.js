@@ -59,9 +59,6 @@ app.config(['$routeProvider', function ($routeProvider) {
 app.controller('PageCtrl', function (/* $scope, $location, $http */) {
  // console.log("Page Controller reporting for duty.");
 
-
-
-
 });
 
 
@@ -85,27 +82,6 @@ app.controller('MainController', function (
         };  
 });
 
-
-
-app.controller('RepoController', function (
-            $scope, github, $routeParams) {
-
-    var onRepo = function (data) {
-        $scope.repo = data;
-    };
-
-    var onError = function (reason) {
-        $scope.error = reason;
-    };
-
-    var reponame = $routeParams.reponame;
-    var username = $routeParams.username;
-
-    github.getRepoDetails(username, reponame)
-    .then(onRepo, onError);
-});
-
-
 app.controller('UserController', function (
         $scope, github, $routeParams) {
 
@@ -128,10 +104,29 @@ app.controller('UserController', function (
 
 });
 
+app.controller('RepoController', function (
+            $scope, github, $routeParams) {
+
+    var onRepo = function (data) {
+        $scope.repo = data;
+    };
+
+    var onError = function (reason) {
+        $scope.error = reason;
+    };
+
+    //username and repo passed from user.html
+    var reponame = $routeParams.reponame;
+    var username = $routeParams.username;
+
+    github.getRepoDetails(username, reponame)
+    .then(onRepo, onError);
 
 
 
 
+
+});
 
 
 //bootstrap nav menu hide on click
@@ -146,12 +141,17 @@ $(document).on('click', '.navbar-collapse.in', function (e) {
     //Revealing module pattern
     //Get user and repos for user
     var github = function ($http) {
+
+
+        //Return github user profile
         var getUser = function (username) {
             return $http.get("https://api.github.com/users/" + username)
                   .then(function (response) {
                       return response.data;
                   });
         }
+        
+        //return repos for user
         var getRepos = function (user) {
             return $http.get(user.repos_url)
                         .then(function (response) {
@@ -159,10 +159,10 @@ $(document).on('click', '.navbar-collapse.in', function (e) {
                         });
         };
 
+
         var getRepoDetails = function (username, reponame) {
 
             var repo;
-
             var repoUrl = "https://api.github.com/repos/" + username + "/" + reponame;
 
             //Chained promises
@@ -176,7 +176,6 @@ $(document).on('click', '.navbar-collapse.in', function (e) {
                             repo.contributors = response.data;
                             return repo;
                         });
-
         };
 
         return {
