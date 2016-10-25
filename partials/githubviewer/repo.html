@@ -41,6 +41,13 @@ text {
   font: 12px sans-serif;
 }
 
+svg{
+    padding-left:100px;
+    padding-top: 50px;
+    height: 260px;
+
+}
+
 
 </style>
 
@@ -61,9 +68,9 @@ text {
     svg.append("g")
         .attr("class", "lines");
 
-    var width = 960/3,
-        height = 450/3,
-        radius = Math.min(width, height) / 2;
+    var width = 960/2.5,
+        height = 450/2.5,
+        radius = (Math.min(width, height) / 2) + 20;
 
     var pie = d3.layout.pie()
         .sort(null)
@@ -95,8 +102,6 @@ text {
     datasetTotal = [
             { label: "Category 1", value: 19 },
             { label: "Category 2", value: 5 },
-            { label: "Category 3", value: 13 },
-            { label: "Category 4", value: 17 },
             { label: "Category 5", value: 19 },
             { label: "Category 6", value: 27 }
     ];
@@ -104,14 +109,11 @@ text {
     datasetOption1 = [
             { label: "Category 1", value: 22 },
             { label: "Category 2", value: 33 },
-            { label: "Category 3", value: 4 },
-            { label: "Category 4", value: 15 },
-            { label: "Category 5", value: 36 },
-            { label: "Category 6", value: 0 }
+   
     ];
 
     datasetOption2 = [
-            { label: "Category 1", value: 10 },
+
             { label: "Category 2", value: 20 },
             { label: "Category 3", value: 30 },
             { label: "Category 4", value: 5 },
