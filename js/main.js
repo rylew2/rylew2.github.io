@@ -126,7 +126,8 @@
             var dataset = [];
             var total = 0;
             var x = event.currentTarget;
-            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
+            angular.element(x).addClass("selected").siblings().removeClass("selected");
+            angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");
                 var myVal = angular.element(this).attr("data-value");
                 total += myVal;
@@ -138,12 +139,6 @@
             angular.element(x).parent().parent().find('.languageSPAN').each(function () {
 
             });
-
-            datasetTotal = [
-                { label: "Shell", value: 75 },
-                { label: "VIML", value: 25 },
-            ];
-
             
             if (dataset.length > 0) {
                 $scope.chartMessage = null;
@@ -157,7 +152,10 @@
 
         };
 
-
+        $scope.toggleRow = function () {
+            var x = event.currentTarget;
+           
+        };
 
     });
     /*End User Controller*/

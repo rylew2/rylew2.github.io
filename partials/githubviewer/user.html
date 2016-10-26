@@ -66,6 +66,11 @@
    tr:hover{
        background: #fff0a7;
    }
+
+   .selected {
+       background: #b7d3f5
+   }
+
 </style>
 
 
@@ -109,21 +114,19 @@
         </div> <!-- end div ng-show -->
 
 
-        <div class="col-md-3" >
-            <table border=".5" ng-show="user" style="width:300px;">
+        <div class="col-md-3" style="padding-left:0px !important">
+            <table border=".5" ng-show="user" style="width:352px;">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Repository Name</th>
                         <th>Stars</th>
-                        <th style="width:160px;">Select to View Languages</th>
+                        <th style="width:320px;">Select to View Languages Used</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--<label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
-                    <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
-                    <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>-->
+           
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder ">
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder " ng-click="changeLanguages()">
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
@@ -144,7 +147,7 @@
         </div>
    
         <div ng-show="chartMessage==null" id="chart" class="col-md-9">
-             <div ng-show="chartMessage!=null">{{chartMessage}}</div>
+             <div>{{chartMessage}}</div>
         </div>
 
 
@@ -159,8 +162,7 @@
 
 
 <script>
-
-
+ 
     d3.select("input[value=\"total\"]").property("checked", true);
 
     var svg = d3.select("#chart")
@@ -254,30 +256,6 @@
 
         slice.exit()
             .remove();
-
-        var legend = svg.selectAll('.legend')
-            .data(color.domain())
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-            .attr('transform', function (d, i) {
-                var height = legendRectSize + legendSpacing;
-                var offset = height * color.domain().length / 2;
-                var horz = -3 * legendRectSize;
-                var vert = i * height - offset;
-                return 'translate(' + horz + ',' + vert + ')';
-            });
-
-        legend.append('rect')
-            .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
-            .style('fill', color)
-            .style('stroke', color);
-
-        legend.append('text')
-            .attr('x', legendRectSize + legendSpacing)
-            .attr('y', legendRectSize - legendSpacing)
-            .text(function (d) { return d; });
 
         /* ------- TEXT LABELS -------*/
 
