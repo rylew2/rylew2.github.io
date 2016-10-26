@@ -121,6 +121,11 @@
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
 
+        $scope.testMe = function () {
+            alert('inTestMe');
+        };
+
+
     });
     /*End User Controller*/
 

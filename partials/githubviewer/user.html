@@ -69,6 +69,95 @@
 </style>
 
 
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-12 ">
+            <h1 class="page-header">
+                Projects
+
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="../index.html">Home</a>
+                </li>
+                <li >
+                    <a href="#/projects">Projects</a>
+                </li>
+                <li>
+                    Github Browser: User
+                  
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="ghvmain col-lg-12">
+        <img src="https://www.angularjs.org/favicon.ico" style="float:left; height:40px" />
+        <h1>ngular GitHub Browser</h1> <br />
+        <a href="#/ghv/main">Back to Search</a>
+
+        <div>
+            <!-- string is  -->
+            <div>
+                <p ng-show="user.message">{{user.message}}</p>
+                <h2> GitHub username: {{user.login}}</h2>
+               
+            </div>
+          
+        </div> <!-- end div ng-show -->
+
+
+        <div class="col-md-3" >
+            <table border=".5" ng-show="user" style="width:300px;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stars</th>
+                        <th style="width:160px;">Select to View Languages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
+                    <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
+                    <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
+
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder ">
+
+                        <td>
+                            <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
+                                {{repo.name}}
+                            </a>
+                        </td>
+                        <td>{{repo.stargazers_count | number}}</td>
+                        <!-- number filter -->
+                        <!--<td>{{repo.language}}</td>-->
+                        <td>
+                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" /> 
+                            <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> <br />
+            <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
+        </div>
+   
+        <div id="chart" class="col-md-9">
+             
+        </div>
+
+
+
+
+    </div>
+ </div>
+
+
+
+
+
+
 <script>
 
 
@@ -146,9 +235,9 @@
     d3.selectAll("input")
         .on("change", selectDataset);
 
+    d3.selectAll("input").style("color", "red");
+
     function selectDataset() {
-        
-        debugger;
 
         var value = this.value;
         if (value == "total") {
@@ -294,93 +383,6 @@
     };
 
 
-  
+
 
 </script>
-
-
-<div class="container">
-    <div class="row">
-
-        <div class="col-lg-12 ">
-            <h1 class="page-header">
-                Projects
-
-            </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="../index.html">Home</a>
-                </li>
-                <li >
-                    <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                    Github Browser: User
-                  
-                </li>
-            </ol>
-        </div>
-
-    </div>
-    <div class="ghvmain col-lg-12">
-        <img src="https://www.angularjs.org/favicon.ico" style="float:left; height:40px" />
-        <h1>ngular GitHub Browser</h1> <br />
-        <a href="#/ghv/main">Back to Search</a>
-
-        <div>
-            <!-- string is  -->
-            <div>
-                <p ng-show="user.message">{{user.message}}</p>
-                <h2> GitHub username: {{user.login}}</h2>
-               
-            </div>
-
-            <b>Order:</b>
-            <select ng-model="repoSortOrder">
-                <option value="+name">Name asc</option>
-                <option value="-stargazers_count">Stars desc</option>
-            </select>
-           
-        </div> <!-- end div ng-show -->
-
-
-        <div class="col-md-3">
-            <table border=".5" ng-show="user" style="width:300px;">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Stars</th>
-                        <th style="width:160px;">Select to View Languages</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder ">
-
-                        <td>
-                            <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
-                                {{repo.name}}
-                            </a>
-                        </td>
-                        <td>{{repo.stargazers_count | number}}</td>
-                        <!-- number filter -->
-                        <!--<td>{{repo.language}}</td>-->
-                        <td>
-                            <input class="languageRB" type="radio" name="dataset" id="dataset" value="{{repo.name}}" />
-                            <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> <br />
-            <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
-        </div>
-        <div id="chart" class="col-md-9">
-                <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
-                <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
-                <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
-        </div>
-
-
-
-
-    </div>
- </div>
