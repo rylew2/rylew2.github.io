@@ -43,8 +43,8 @@
 
     svg {
         padding-left: 100px;
-        padding-top: 50px;
-        height: 260px;
+        padding-top: 25px;
+        height: 360px;
     }
 
    table{
@@ -119,9 +119,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
+                    <!--<label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
                     <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
-                    <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
+                    <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>-->
 
                     <tr ng-repeat="repo in repos | orderBy:repoSortOrder ">
 
@@ -134,7 +134,7 @@
                         <!-- number filter -->
                         <!--<td>{{repo.language}}</td>-->
                         <td>
-                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" /> 
+                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeLanguages()"  /> 
                             <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
                         </td>
                     </tr>
@@ -143,8 +143,8 @@
             <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
         </div>
    
-        <div id="chart" class="col-md-9">
-             
+        <div ng-show="chartMessage==null" id="chart" class="col-md-9">
+             <div ng-show="chartMessage!=null">{{chartMessage}}</div>
         </div>
 
 
@@ -176,9 +176,9 @@
     svg.append("g")
         .attr("class", "lines");
 
-    var width = 960/2.5,
-        height = 450/2.5,
-        radius = (Math.min(width, height) / 2) + 40;
+    var width = 960/2,
+        height = 450/2,
+        radius = (Math.min(width, height) / 2) + 20;
 
     var pie = d3.layout.pie()
         .sort(null)
@@ -206,37 +206,6 @@
     var color = d3.scale.ordinal()
         .range(colorRange.range());
 
-
-    datasetTotal = [
-            { label: "Category 1", value: 19 },
-            { label: "Category 2", value: 5 },
-            { label: "Category 5", value: 19 },
-            { label: "Category 6", value: 27 }
-    ];
-
-    datasetOption1 = [
-            { label: "Category 1", value: 22 },
-            { label: "Category 2", value: 33 },
-
-    ];
-
-    datasetOption2 = [
-
-            { label: "Category 2", value: 20 },
-            { label: "Category 3", value: 30 },
-            { label: "Category 4", value: 5 },
-            { label: "Category 5", value: 12 },
-            { label: "Category 6", value: 23 }
-    ];
-
-    change(datasetTotal);
-
-
-    d3.selectAll("input")
-        .on("change", selectDataset);
-
-    d3.selectAll("input").style("color", "red");
-
     function selectDataset() {
 
         var value = this.value;
@@ -250,7 +219,6 @@
             change(datasetOption2);
         }
     }
-
     function change(data) {
 
         /* ------- PIE SLICES -------*/
@@ -287,29 +255,29 @@
         slice.exit()
             .remove();
 
-        //var legend = svg.selectAll('.legend')
-        //    .data(color.domain())
-        //    .enter()
-        //    .append('g')
-        //    .attr('class', 'legend')
-        //    .attr('transform', function (d, i) {
-        //        var height = legendRectSize + legendSpacing;
-        //        var offset = height * color.domain().length / 2;
-        //        var horz = -3 * legendRectSize;
-        //        var vert = i * height - offset;
-        //        return 'translate(' + horz + ',' + vert + ')';
-        //    });
+        var legend = svg.selectAll('.legend')
+            .data(color.domain())
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', function (d, i) {
+                var height = legendRectSize + legendSpacing;
+                var offset = height * color.domain().length / 2;
+                var horz = -3 * legendRectSize;
+                var vert = i * height - offset;
+                return 'translate(' + horz + ',' + vert + ')';
+            });
 
-        //legend.append('rect')
-        //    .attr('width', legendRectSize)
-        //    .attr('height', legendRectSize)
-        //    .style('fill', color)
-        //    .style('stroke', color);
+        legend.append('rect')
+            .attr('width', legendRectSize)
+            .attr('height', legendRectSize)
+            .style('fill', color)
+            .style('stroke', color);
 
-        //legend.append('text')
-        //    .attr('x', legendRectSize + legendSpacing)
-        //    .attr('y', legendRectSize - legendSpacing)
-        //    .text(function (d) { return d; });
+        legend.append('text')
+            .attr('x', legendRectSize + legendSpacing)
+            .attr('y', legendRectSize - legendSpacing)
+            .text(function (d) { return d; });
 
         /* ------- TEXT LABELS -------*/
 
@@ -381,6 +349,7 @@
         polyline.exit()
             .remove();
     };
+
 
 
 

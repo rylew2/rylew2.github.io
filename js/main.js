@@ -121,9 +121,42 @@
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
 
-        $scope.testMe = function () {
-            alert('inTestMe');
+        $scope.changeLanguages = function () {
+        
+            var dataset = [];
+            var total = 0;
+            var x = event.currentTarget;
+            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
+                var key = angular.element(this).attr("data-key");
+                var myVal = angular.element(this).attr("data-value");
+                total += myVal;
+
+                var o = { label : key, value: parseInt(myVal) };
+                dataset.push(o);
+            });
+            
+            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
+
+            });
+
+            datasetTotal = [
+                { label: "Shell", value: 75 },
+                { label: "VIML", value: 25 },
+            ];
+
+            
+            if (dataset.length > 0) {
+                $scope.chartMessage = null;
+                change(dataset);
+            }
+            else {
+                $scope.chartMessage = "No languages used";
+            }
+
+
+
         };
+
 
 
     });
