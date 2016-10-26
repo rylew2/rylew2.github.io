@@ -70,6 +70,8 @@
 
 
 <script>
+
+
     d3.select("input[value=\"total\"]").property("checked", true);
 
     var svg = d3.select("#chart")
@@ -146,6 +148,7 @@
 
     function selectDataset() {
         
+        debugger;
 
         var value = this.value;
         if (value == "total") {
@@ -361,7 +364,10 @@
                         <td>{{repo.stargazers_count | number}}</td>
                         <!-- number filter -->
                         <!--<td>{{repo.language}}</td>-->
-                        <td><input class="languageRB" type="radio" name="dataset" id="dataset" value="{{repo.name}}" /></td>
+                        <td>
+                            <input class="languageRB" type="radio" name="dataset" id="dataset" value="{{repo.name}}" />
+                            <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
+                        </td>
                     </tr>
                 </tbody>
             </table> <br />
