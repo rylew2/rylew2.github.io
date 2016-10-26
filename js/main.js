@@ -80,9 +80,8 @@
     /* End Main Controller */
 
     /* User Controller */
-    app.controller('UserController', function (
-            $scope, github, $routeParams) {
-
+    app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
+        $scope.repos = {};
         //1.) Successful return of Github user
         var onUserComplete = function (data) {
             $scope.user = data;
@@ -91,12 +90,28 @@
 
         // 2.) get all the repos
         var onRepos = function (data) {
+            var clientSecret = '?client_id=9b254584c151259f146a&client_secret=552ead4d53b54ebd99adf72edd017626c5f496cf';
+
+
             $scope.repos = data;
+
+            var promises = [];
+        
+            for (var i = 0; i < data.length; i++) {
+                var langURL = data[i].languages_url;
+                var promise = $http.get(langURL + clientSecret);
+                promises.push(promise);
+            }
+            $q.all(promises).then(onLanguages, onError);
+
+
            // github.getLanguages($scope.user.login, $scope.repo).then(onLanguages, onError);
         };
 
         var onLanguages = function (data) {
-           
+            for (var i = 0; i < data.length; i++) {
+                $scope.repos[i].languages = data[i].data;
+            }
         }
 
         var onError = function (reason) {
