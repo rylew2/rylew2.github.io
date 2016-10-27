@@ -66,8 +66,7 @@
 
 
     /* Main Controller*/
-    app.controller('MainController', function (
-        $scope, $interval, $location, $routeParams) {
+    app.controller('MainController', function ($scope, $interval, $location, $routeParams) {
 
             var onError = function (reason) {         
                 $scope.error = "Could not fetch the data from GitHub";
@@ -118,57 +117,59 @@
             $scope.error = "Could not fetch the data from GitHub";
         };
 
-        $scope.repoSortOrder = "-stargazers_count";
-        github.getUser($routeParams.username).then(onUserComplete, onError);
-
         $scope.changeLanguages = function () {
-        
+
             var dataset = [];
             var total = 0;
             var x = event.currentTarget;
             var myVal;
-          //  $scope.mycheck = true;
+            //  $scope.mycheck = true;
             angular.element(x).find('.languageSPAN').each(function () {
-                myVal = parseInt( angular.element(this).attr("data-value") ) ;
+                myVal = parseInt(angular.element(this).attr("data-value"));
                 total = total + myVal;
             });
-            
-           // angular.element(x).find('input').attr('checked') = checked;
+
+            $scope.thisRepo = angular.element(x).find('a').text();
+
+
+            // angular.element(x).find('input').attr('checked') = checked;
             angular.element(x).addClass("selected").siblings().removeClass("selected");
             angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");
                 var percent = ((parseInt(angular.element(this).attr("data-value")) / total) * 100).toFixed(2);
-  
 
-                var o = { label : key, value: percent };
+
+                var o = { label: key, value: percent };
                 dataset.push(o);
             });
             total = 0;
-     
-            
+
+
             if (dataset.length > 0) {
                 $scope.chartMessage = null;
                 change(dataset);
             }
             else {
-                $scope.chartMessage = "No languages used";
+                $scope.chartMessage = "No languages used in this repository.";
             }
 
 
 
         };
 
-        $scope.toggleRow = function () {
-            var x = event.currentTarget;
-           
-        };
+
+        $scope.repoSortOrder = "-stargazers_count";
+        github.getUser($routeParams.username).then(onUserComplete, onError);
+        $scope.chartMessage = "";
+        //selected new repository - update donut chart with new data
+   
+
 
     });
     /*End User Controller*/
 
     /*Repo Controller*/
-    app.controller('RepoController', function (
-                $scope, github, $routeParams) {
+    app.controller('RepoController', function ($scope, github, $routeParams) {
 
         var onRepo = function (data) {
             $scope.repo = data;
@@ -244,22 +245,10 @@
                             });
             };
 
-            // https://api.github.com/repos/rylew2/ebaydealfindermvc/languages
-            var getLanguages = function (username, reponame) {
-                var repo;
-                var repoUrl = "https://api.github.com/repos/" + username + "/" + reponame + "/" + "languages" + clientSecret;
-            
-                return $http.get(repoUrl + clientSecret)
-                          .then(function (response) {
-                              return response.data;
-                          });
-            };
-
             return {
                 getUser: getUser,
                 getRepos: getRepos,
-                getRepoDetails: getRepoDetails,
-                getLanguages : getLanguages
+                getRepoDetails: getRepoDetails
             };
 
         }

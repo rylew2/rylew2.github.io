@@ -41,12 +41,6 @@
         font: 12px sans-serif;
     }
 
-    svg {
-        padding-left: 100px;
-        padding-top: 25px;
-        height: 360px;
-    }
-
    table{
         width:250px;
         text-align: center !important;
@@ -63,13 +57,28 @@
        width:115px;
    }
 
-   tr:hover{
+   table tbody tr:hover{
        background: #fff0a7;
    }
 
    .selected {
        background: #b7d3f5
    }
+
+   div#chart {
+          border: 1px solid black;
+    width: 597px;
+    margin-left: 78px;
+    height: 325px;
+   }
+   
+    svg {
+        padding-left: 32px;
+            padding-top:32px;
+        height: 320px;
+    }
+
+
 
 </style>
 
@@ -108,6 +117,7 @@
             <div>
                 <p ng-show="user.message">{{user.message}}</p>
                 <h2> GitHub username: {{user.login}}</h2>
+                <h4>Top Repositories</h4>
                
             </div>
           
@@ -126,7 +136,7 @@
                 <tbody>
            
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()" >
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()" ng-model="{{repo.name}}" >
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
@@ -143,20 +153,27 @@
                     </tr>
                 </tbody>
             </table> <br />
+            <p style="font-size:smaller">Select anywhere on repository row to view language breakdown. <br />Click the repository name to view more details.</p>
+
             <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
         </div>
    
         <div ng-show="chartMessage==null" id="chart" class="col-md-9">
+             <h4>Language Breakdown for {{thisRepo}}</h4>
              <div>{{chartMessage}}</div>
+           
+        </div>
+        <div class="col-md-9 barChartOuterDiv">
+            <div class="barChart">
+                <h4>Total Lines of Code by Language among Top Repositories for {{user.name}}</h4>
+                <p><span id="city"></span> - <span id="inches"></span></p>
+            </div>
         </div>
 
-
-
-
     </div>
+
+
  </div>
-
-
 
 
 
@@ -208,19 +225,7 @@
     var color = d3.scale.ordinal()
         .range(colorRange.range());
 
-    function selectDataset() {
 
-        var value = this.value;
-        if (value == "total") {
-            change(datasetTotal);
-        }
-        else if (value == "option1") {
-            change(datasetOption1);
-        }
-        else if (value == "option2") {
-            change(datasetOption2);
-        }
-    }
     function change(data) {
 
         /* ------- PIE SLICES -------*/
@@ -257,6 +262,34 @@
         slice.exit()
             .remove();
 
+
+
+        /* ------- SLICE TO TEXT POLYLINES -------*/
+
+        var polyline = svg.select(".lines").selectAll("polyline")
+            .data(pie(data), function (d) { return d.data.label });
+        
+        polyline.enter()
+            .append("polyline");
+
+        polyline.transition().duration(1000)
+            .attrTween("points", function (d) {
+                this._current = this._current || d;
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function (t) {
+                    var d2 = interpolate(t);
+                    var pos = outerArc.centroid(d2);
+                    pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                    return [arc.centroid(d2), outerArc.centroid(d2), pos];
+                };
+            });
+
+        polyline.exit()
+            .remove();
+
+
+
         /* ------- TEXT LABELS -------*/
 
         var text = svg.select(".labelName").selectAll("text")
@@ -265,13 +298,14 @@
         text.enter()
             .append("text")
             .attr("dy", ".35em")
-            .text(function (d) {
-                return (d.data.label + ": " + d.value + "%");
+            .text(function (d) {               
+                    return (d.data.label + ": " + d.value + "%");
+
             });
-               //.attr("transform", function (d) {
-               //    return "translate(" + pos.centroid(d) + ") " +
-               //            "rotate(" + getAngle(d) + ")";
-               //})             ;
+        //.attr("transform", function (d) {
+        //    return "translate(" + pos.centroid(d) + ") " +
+        //            "rotate(" + getAngle(d) + ")";
+        //})             ;
 
         function midAngle(d) {
             return d.startAngle + (d.endAngle - d.startAngle) / 2;
@@ -300,40 +334,231 @@
                 };
             })
             .text(function (d) {
-                return (d.data.label + ": " + d.value + "%");
+                   return (d.data.label + ": " + d.value + "%");
             });
 
 
         text.exit()
             .remove();
 
-        /* ------- SLICE TO TEXT POLYLINES -------*/
 
-        var polyline = svg.select(".lines").selectAll("polyline")
-            .data(pie(data), function (d) { return d.data.label });
+        alpha = .7;
+        spacing = 11;
 
-        polyline.enter()
-            .append("polyline");
+        function relax() {
+            again = false;
+            text.each(function (d, i) {
+                a = this; //reference to text label
+                da = d3.select(a);
+                y1 = da.attr("y");
+                text.each(function (d, j) {
+                    b = this;
+                    // a & b are the same element and don't collide.
+                    if (a == b) return;
+                    db = d3.select(b);
+                    // a & b are on opposite sides of the chart and
+                    // don't collide
+                    if (da.attr("text-anchor") != db.attr("text-anchor")) return;
+                    // Now let's calculate the distance between
+                    // these elements. 
+                    y2 = db.attr("y");
+                    deltaY = y1 - y2;
 
-        polyline.transition().duration(1000)
-            .attrTween("points", function (d) {
-                this._current = this._current || d;
-                var interpolate = d3.interpolate(this._current, d);
-                this._current = interpolate(0);
-                return function (t) {
-                    var d2 = interpolate(t);
-                    var pos = outerArc.centroid(d2);
-                    pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
-                    return [arc.centroid(d2), outerArc.centroid(d2), pos];
-                };
+                    // If spacing is greater than our specified spacing,
+                    // they don't collide.
+                    if (Math.abs(deltaY) > spacing) return;
+
+                    // If the labels collide, we'll push each 
+                    // of the two labels up and down a little bit.
+                    again = true;
+                    sign = deltaY > 0 ? 1 : -1;
+                    adjust = sign * alpha;
+                    da.attr("y", +y1 + adjust);
+                    db.attr("y", +y2 - adjust);
+                });
+
             });
+            // Adjust our line leaders here
+            // so that they follow the labels. 
+            if (again) {
+                //debugger;
+                labelElements = text[0];
+              //  debugger;
+                polyline.attr("y2", function (d, i) {
+                  //  debugger;
+                    labelForLine = d3.select(labelElements[i]);
+                    return labelForLine.attr("y");
+                });
+                
 
-        polyline.exit()
-            .remove();
+
+
+                setTimeout(relax, 20)
+            }
+        }
+
+        relax();
+
+
+
     };
 
-
-
-
-
 </script>
+
+<script>
+    (function () {  
+
+    function render() {
+        // Golden Snowglobe totals (as of 2/5/15)
+        var dataset = [
+          { "city": "Buffalo", "snow": 75.5 },
+          { "city": "Syracuse", "snow": 60.1 },
+          { "city": "Binghamton", "snow": 58.7 },
+          { "city": "Rochester", "snow": 54.2 },
+          { "city": "Albany", "snow": 52.3 }
+        ]
+
+        // Dimensions for the chart: height, width, and space b/t the bars
+        var margins = { top: 30, right: 50, bottom: 30, left: 50 }
+        var height = 400 - margins.left - margins.right,
+            width = 700 - margins.top - margins.bottom,
+            barPadding = 5
+
+        // Create a scale for the y-axis based on data
+        // >> Domain - min and max values in the dataset
+        // >> Range - physical range of the scale (reversed)
+        var yScale = d3.scale.linear()
+          .domain([0, d3.max(dataset, function (d) {
+              return d.snow;
+          })])
+          .range([height, 0]);
+
+        // Implements the scale as an actual axis
+        // >> Orient - places the axis on the left of the graph
+        // >> Ticks - number of points on the axis, automated
+        var yAxis = d3.svg.axis()
+          .scale(yScale)
+          .orient('left')
+          .ticks(5);
+
+        // Creates a scale for the x-axis based on city names
+        var xScale = d3.scale.ordinal()
+          .domain(dataset.map(function (d) {
+              return d.city;
+          }))
+          .rangeRoundBands([0, width], .1);
+
+        // Creates an axis based off the xScale properties
+        var xAxis = d3.svg.axis()
+          .scale(xScale)
+          .orient('bottom');
+
+        // Creates the initial space for the chart
+        // >> Select - grabs the empty <div> above this script
+        // >> Append - places an <svg> wrapper inside the div
+        // >> Attr - applies our height & width values from above
+        var chart = d3.select('.barChart')
+          .append('svg').attr('class','svgBarChart')
+          .attr('width', width + margins.left + margins.right)
+          .attr('height', height + margins.top + margins.bottom)
+          .append('g')
+          .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
+
+        // For each value in our dataset, places and styles a bar on the chart
+
+        // Step 1: selectAll.data.enter.append
+        // >> Loops through the dataset and appends a rectangle for each value
+        chart.selectAll('rect')
+          .data(dataset)
+          .enter()
+          .append('rect')
+
+          // Step 2: X & Y
+          // >> X - Places the bars in horizontal order, based on number of
+          //        points & the width of the chart
+          // >> Y - Places vertically based on scale
+          .attr('x', function (d, i) {
+              return xScale(d.city);
+          })
+          .attr('y', function (d) {
+              return yScale(d.snow);
+          })
+
+          // Step 3: Height & Width
+          // >> Width - Based on barpadding and number of points in dataset
+          // >> Height - Scale and height of the chart area
+          .attr('width', (width / dataset.length) - barPadding)
+          .attr('height', function (d) {
+              return height - yScale(d.snow);
+          })
+          .attr('fill', 'steelblue')
+
+          // Step 4: Info for hover interaction
+          .attr('class', function (d) {
+              return d.city;
+          })
+          .attr('id', function (d) {
+              return d.snow;
+          });
+
+        // Renders the yAxis once the chart is finished
+        // >> Moves it to the left 10 pixels so it doesn't overlap
+        chart.append('g')
+          .attr('class', 'axis')
+          .attr('transform', 'translate(-10, 0)')
+          .call(yAxis);
+
+        // Appends the yAxis
+        chart.append('g')
+          .attr('class', 'axis')
+          .attr('transform', 'translate(0,' + (height + 10) + ')')
+          .call(xAxis);
+
+        // Adds yAxis title
+        chart.append('text')
+          .text('Lines of Code')
+          .attr('transform', 'translate(-70, -20)');
+    }
+
+    $(function () {
+        // On document load, call the render() function to load the graph
+        render();
+
+        $('rect').mouseenter(function () {
+            $('#city').html(this.className.animVal);
+            $('#inches').html($(this).attr('id'));
+        });
+    });
+
+    }());
+</script>
+
+
+<style>
+ .axis path,
+      .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+
+      text,
+      .axis text {
+        font-size: 11px;
+      }
+
+      rect:hover {
+        fill: orange;
+      }
+    .svgBarChart{
+        height: 500px !important;
+        padding-top: 8px;
+    }
+    .barChart{
+        margin-left:63px;
+        margin-top:2px;
+        border: 1px solid black;
+        height: 480px;
+    }
+
+</style>
