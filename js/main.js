@@ -126,6 +126,11 @@
             var dataset = [];
             var total = 0;
             var x = event.currentTarget;
+
+            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
+
+            });
+
             angular.element(x).addClass("selected").siblings().removeClass("selected");
             angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");
@@ -136,9 +141,7 @@
                 dataset.push(o);
             });
             
-            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
-
-            });
+     
             
             if (dataset.length > 0) {
                 $scope.chartMessage = null;

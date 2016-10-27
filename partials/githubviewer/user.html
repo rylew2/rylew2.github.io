@@ -126,7 +126,7 @@
                 <tbody>
            
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder " ng-click="changeLanguages()">
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()">
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
