@@ -127,11 +127,13 @@
             var total = 0;
             var x = event.currentTarget;
             var myVal;
+          //  $scope.mycheck = true;
             angular.element(x).find('.languageSPAN').each(function () {
                 myVal = parseInt( angular.element(this).attr("data-value") ) ;
                 total = total + myVal;
             });
-
+            
+           // angular.element(x).find('input').attr('checked') = checked;
             angular.element(x).addClass("selected").siblings().removeClass("selected");
             angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");

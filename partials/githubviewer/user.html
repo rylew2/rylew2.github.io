@@ -120,13 +120,13 @@
                     <tr>
                         <th>Repository Name</th>
                         <th>Stars</th>
-                        <th style="width:320px;">Select to View Languages Used</th>
+                        <th style="width:320px; display:none">Select to View Languages Used</th>
                     </tr>
                 </thead>
                 <tbody>
            
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()">
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()" >
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
@@ -136,8 +136,8 @@
                         <td>{{repo.stargazers_count | number}}</td>
                         <!-- number filter -->
                         <!--<td>{{repo.language}}</td>-->
-                        <td>
-                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeLanguages()"  /> 
+                        <td style="display:none">
+                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeLanguages()" ng-checked="mycheck" /> 
                             <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
                         </td>
                     </tr>
@@ -268,6 +268,10 @@
             .text(function (d) {
                 return (d.data.label + ": " + d.value + "%");
             });
+               //.attr("transform", function (d) {
+               //    return "translate(" + pos.centroid(d) + ") " +
+               //            "rotate(" + getAngle(d) + ")";
+               //})             ;
 
         function midAngle(d) {
             return d.startAngle + (d.endAngle - d.startAngle) / 2;
