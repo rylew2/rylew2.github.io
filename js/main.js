@@ -126,21 +126,22 @@
             var dataset = [];
             var total = 0;
             var x = event.currentTarget;
-
-            angular.element(x).parent().parent().find('.languageSPAN').each(function () {
-
+            var myVal;
+            angular.element(x).find('.languageSPAN').each(function () {
+                myVal = parseInt( angular.element(this).attr("data-value") ) ;
+                total = total + myVal;
             });
 
             angular.element(x).addClass("selected").siblings().removeClass("selected");
             angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");
-                var myVal = angular.element(this).attr("data-value");
-                total += myVal;
+                var percent = ((parseInt(angular.element(this).attr("data-value")) / total) * 100).toFixed(2);
+  
 
-                var o = { label : key, value: parseInt(myVal) };
+                var o = { label : key, value: percent };
                 dataset.push(o);
             });
-            
+            total = 0;
      
             
             if (dataset.length > 0) {
