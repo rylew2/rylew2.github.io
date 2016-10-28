@@ -186,7 +186,7 @@
                 change(dataset);
             }
             else {
-                debugger;
+               // debugger;
                 $scope.chartMessage = "No languages used in this repository.";
             }
 

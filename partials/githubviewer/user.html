@@ -110,7 +110,7 @@
 
     </div>
     <div class="ghvmain col-lg-12">
-        <img src="https://www.angularjs.org/favicon.ico" style="float:left; height:40px" />
+        <img src="https://www.angularjs.org/favicon.ico" <!--style="float:left; height:40px"--> />
         <h1>ngular GitHub Browser</h1> <br />
         <a href="#/ghv/main">Back to Search</a>
 
@@ -149,7 +149,7 @@
                         <!-- number filter -->
                         <!--<td>{{repo.language}}</td>-->
                         <td style="display:none">
-                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeRepo()" ng-checked="mycheck" /> 
+                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" <!--ng-click="changeRepo()"--> ng-checked="mycheck" /> 
                             <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
                         </td>
                     </tr>
@@ -181,7 +181,7 @@
 
 
 
-
+<!-- Repository Language Breakdown-->
 <script>
  
     d3.select("input[value=\"total\"]").property("checked", true);
@@ -410,23 +410,11 @@
 </script>
 
 
+<!-- Language Total Lines of Code -->
 <script>
 
 
     function render(dataset) {
-        // Golden Snowglobe totals (as of 2/5/15)
-        //var dataset = [
-        //  { "city": "Buffalo", "snow": 75.5 },
-        //  { "city": "Syracuse", "snow": 60.1 },
-        //  { "city": "Binghamton", "snow": 58.7 },
-        //  { "city": "Rochester", "snow": 54.2 },
-        //  { "city": "well", "snow": 22.2 },
-        //  { "city": "alabama", "snow": 56.2 },
-        //  { "city": "Albany", "snow": 52.3 }
-
-        //];
-
-
 
         // Dimensions for the chart: height, width, and space b/t the bars
         var margins = { top: 30, right: 50, bottom: 30, left: 50 }
@@ -474,6 +462,13 @@
           .append('g')
           .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
 
+
+        var tooltip = d3.select('body').append('div')
+        .style('position', 'absolute')
+        .style('padding', '0 10px')
+        .style('background', 'white')
+        .style('opacity', 0)
+
         // For each value in our dataset, places and styles a bar on the chart
 
         // Step 1: selectAll.data.enter.append
@@ -493,6 +488,23 @@
           .attr('y', function (d) {
               return yScale(d.snow);
           })
+          .on('mouseover', function (d) {
+
+              tooltip.transition()
+                  .style('opacity', .7)
+             
+              tooltip.html(d.snow.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' lines')
+                  .style('left', (d3.event.pageX - 35) + 'px')
+                  .style('top', (d3.event.pageY - 30) + 'px')
+
+          })
+          .on('mouseout', function (d) {
+
+              tooltip.transition()
+                  .style('opacity', 0)
+          })
+
+           
 
           // Step 3: Height & Width
           // >> Width - Based on barpadding and number of points in dataset
