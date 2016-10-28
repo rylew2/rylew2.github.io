@@ -197,7 +197,7 @@
 
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
-        $scope.chartMessage = "Please highlight a repository row.";
+        $scope.chartMessage = "Please select a repository row.";
     
         //selected new repository - update donut chart with new data
         
