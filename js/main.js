@@ -81,6 +81,9 @@
     /* User Controller */
     app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
         $scope.repos = {};
+        
+        
+        
         //1.) Successful return of Github user
         var onUserComplete = function (data) {
             $scope.user = data;
@@ -109,8 +112,12 @@
 
         var onLanguages = function (data) {
             for (var i = 0; i < data.length; i++) {
+                debugger;
                 $scope.repos[i].languages = data[i].data;
             }
+
+            
+
         }
 
         var onError = function (reason) {
@@ -129,7 +136,7 @@
                 total = total + myVal;
             });
 
-            $scope.thisRepo = angular.element(x).find('a').text();
+            $scope.thisRepo =angular.element(x).find('a').text();
 
 
             // angular.element(x).find('input').attr('checked') = checked;
@@ -137,8 +144,6 @@
             angular.element(x).find('.languageSPAN').each(function () {
                 var key = angular.element(this).attr("data-key");
                 var percent = ((parseInt(angular.element(this).attr("data-value")) / total) * 100).toFixed(2);
-
-
                 var o = { label: key, value: percent };
                 dataset.push(o);
             });
