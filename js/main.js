@@ -82,6 +82,7 @@
     app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
         $scope.repos = {};
         
+
         
         
         //1.) Successful return of Github user
@@ -113,39 +114,42 @@
 
         var a = [];
         var obj = {};
+        
+        function lookup(name) {
+            for (var i = 0, len = a.length; i < len; i++) {
+                if (a[i].city === name)
+                    return [true, i];
+            }
+            return [false];
+        }
+
+
         var onLanguages = function (data) {
+
             for (var i = 0; i < data.length; i++) {  
                 var o = data[i].data;
                 $scope.repos[i].languages = o;
-
-                for (var key in o) {
-                    if (data[i].data.hasOwnProperty(key)) {
-                        var lines = o[key];
-                        var found = false;
-
-                            debugger;
-               
-                        //if(a[0].filter( function(c) {return c.key === lines; ){
-
-                        //}
-                        //else{
-                        //    a.push({ key, lines });
-                        //}
-                        //a.push({ key, lines });
-
-
-                        debugger;
-                        //var b = {key, o[key]};
-                        //var pushMe = {key, data[i].data[key]};
-                       // a.push( pushMe );
-
-
+            
+                Object.keys(o).forEach(function (key, index) {
+                    // key: the name of the object key
+                    // index: the ordinal position of the key within the object
+                    var lines = o[key];
+                    var b = lookup(key);
+                    if (!b[0]) {
+                        a.push({'city': key , snow: lines });
                     }
-                }
+                    else {
+                      
+                        a[b[1]].snow = a[b[1]].snow + lines;
+                    }
+
+                });
+
 
             }
-            debugger;
-           
+           // debugger;
+            $scope.langTotals = a;
+            render(a);
 
 
             
@@ -295,5 +299,9 @@
         var module = angular.module("rylew"); //no second parameter because we're not creating a module, just trying to create a module
         module.factory("github", github); //register the service with angular
         // (name of service , name of function that returns function api object ) 
+            
+
+   
+
 
     })();
