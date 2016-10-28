@@ -109,12 +109,23 @@
 
            // github.getLanguages($scope.user.login, $scope.repo).then(onLanguages, onError);
         };
+        
 
+        var a = [];
+        var obj = {};
         var onLanguages = function (data) {
             for (var i = 0; i < data.length; i++) {
                 debugger;
+
+                
                 $scope.repos[i].languages = data[i].data;
             }
+            debugger;
+           
+
+            objs.sort(function (a, b) {
+                 return a.last_nom > b.last_nom;
+            });
 
             
 
@@ -167,7 +178,7 @@
         github.getUser($routeParams.username).then(onUserComplete, onError);
         $scope.chartMessage = "";
         //selected new repository - update donut chart with new data
-   
+        
 
 
     });
