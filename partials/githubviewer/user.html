@@ -78,7 +78,9 @@
         height: 320px;
     }
 
+    div#chartBorder {
 
+    }
 
 </style>
 
@@ -136,7 +138,7 @@
                 <tbody>
            
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeLanguages()">
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeRepo()">
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
@@ -147,7 +149,7 @@
                         <!-- number filter -->
                         <!--<td>{{repo.language}}</td>-->
                         <td style="display:none">
-                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeLanguages()" ng-checked="mycheck" /> 
+                            <input  type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" ng-click="changeRepo()" ng-checked="mycheck" /> 
                             <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
                         </td>
                     </tr>
@@ -157,14 +159,16 @@
 
             <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
         </div>
-   
-        <div id="chart" class="col-md-9">
-             <h4>Language Breakdown for {{thisRepo}}</h4>
-             <div ng-show="chartMessage==null" >{{chartMessage}}</div>
-           
-        </div>
+             <div id="chart" class="col-md-9">
+
+                <h4 ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
+                <div>{{chartMessage}}</div>
+     
+            </div>
+
         <div class="col-md-9 barChartOuterDiv">
             <div class="barChart">
+                
                 <h4>Total Lines of Code by Language among Top 30 Repositories for {{user.name}}</h4>
                 <p><span id="city"></span> - <span id="inches"></span></p>
             </div>
@@ -183,7 +187,7 @@
     d3.select("input[value=\"total\"]").property("checked", true);
 
     var svg = d3.select("#chart")
-        .append("svg")
+        .append("svg").attr("ng-show","chartMessage==null")
         .append("g")
 
     svg.append("g")

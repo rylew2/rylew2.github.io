@@ -81,10 +81,18 @@
     /* User Controller */
     app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
         $scope.repos = {};
+        var a = [];
+        var obj = {};
         
+        function lookup(name) {
+            for (var i = 0, len = a.length; i < len; i++) {
+                if (a[i].city === name)
+                    return [true, i];
+            }
+            return [false];
+        }
 
-        
-        
+       
         //1.) Successful return of Github user
         var onUserComplete = function (data) {
             $scope.user = data;
@@ -94,7 +102,6 @@
         // 2.) get all the repos
         var onRepos = function (data) {
             var clientSecret = '?client_id=9b254584c151259f146a&client_secret=552ead4d53b54ebd99adf72edd017626c5f496cf';
-
 
             $scope.repos = data;
 
@@ -107,22 +114,10 @@
             }
             $q.all(promises).then(onLanguages, onError);
 
-
-           // github.getLanguages($scope.user.login, $scope.repo).then(onLanguages, onError);
         };
         
 
-        var a = [];
-        var obj = {};
-        
-        function lookup(name) {
-            for (var i = 0, len = a.length; i < len; i++) {
-                if (a[i].city === name)
-                    return [true, i];
-            }
-            return [false];
-        }
-
+    
 
         var onLanguages = function (data) {
 
@@ -160,8 +155,8 @@
             $scope.error = "Could not fetch the data from GitHub";
         };
 
-        $scope.changeLanguages = function () {
-
+        $scope.changeRepo = function () {
+            
             var dataset = [];
             var total = 0;
             var x = event.currentTarget;
@@ -191,6 +186,7 @@
                 change(dataset);
             }
             else {
+                debugger;
                 $scope.chartMessage = "No languages used in this repository.";
             }
 
@@ -201,7 +197,8 @@
 
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
-        $scope.chartMessage = "";
+        $scope.chartMessage = "Please highlight a repository row.";
+    
         //selected new repository - update donut chart with new data
         
 
