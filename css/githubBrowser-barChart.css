@@ -1,0 +1,27 @@
+﻿.axis path,
+      .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+ 
+
+      text,
+      .axis text {
+        font-size: 11px;
+      }
+
+      rect:hover {
+        fill: orange;
+      }
+    .svgBarChart{
+        height: 500px !important;
+        padding-top: 8px;
+    }
+    .barChart{
+        margin-left:63px;
+        margin-top:2px;
+        border: 1px solid black;
+        height: 480px;
+        text-align:center;
+    }

@@ -29,17 +29,17 @@
 
             //GitHub Viewer
             .when("/ghv/main", {
-                templateUrl: "partials/githubviewer/main.html",
+                templateUrl: "partials/githubBrowser/main.html",
                 controller: "MainController",
                 message: 'Viewing main'
             })
             .when("/ghv/user/:username", { // : denotes a parameter
-                templateUrl: "partials/githubviewer/user.html",
+                templateUrl: "partials/githubBrowser/user.html",
                 controller: "UserController",
                 message: 'Viewing user'
             })
             .when("/ghv/repo/:username/:reponame", { // : denotes a parameter
-                templateUrl: "partials/githubviewer/repo.html",
+                templateUrl: "partials/githubBrowser/repo.html",
                 controller: "RepoController",
                 message: 'Viewing repo'
             })
