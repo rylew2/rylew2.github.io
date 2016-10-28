@@ -11,7 +11,7 @@
 
 
     var app = angular.module('rylew', [
-      'ngRoute'
+      'ngRoute', 'angular-toArrayFilter'
     ]);
 
     /**
@@ -118,11 +118,10 @@
             
         // 3.) get and format programming language data
         var onLanguages = function (data) {
-
+            $scope.langTotalCount;
             for (var i = 0; i < data.length; i++) {  
                 var o = data[i].data;
                 $scope.repos[i].languages = o;
-            
                 Object.keys(o).forEach(function (key, index) {
                     var lines = o[key];
                     var b = lookup(key);
@@ -151,9 +150,11 @@
             });
 
         }
-
+        
+        
         var onError = function (reason) {
             $scope.error = "Could not fetch the data from GitHub";
+            $scope.chartMessage = "Error returning Github data."
         };
 
         $scope.changeRepo = function () {
@@ -195,9 +196,7 @@
 
         };
 
-        $scope.barChartMouseover = function () {
-            debugger;
-        };
+
 
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
@@ -231,12 +230,33 @@
     });
     /* End Repo Controller*/
 
-    //bootstrap nav menu hide on click
-    $(document).on('click', '.navbar-collapse.in', function (e) {
-        if ($(e.target).is('a')) {
-            $(this).collapse('hide');
-        }
+
+   // angular.module('rylew', ['angular-toArrayFilter'])
+
+    angular.module('angular-toArrayFilter', [])
+
+    .filter('toArray', function () {
+        return function (obj, addKey) {
+            if (!angular.isObject(obj)) return obj;
+            if (addKey === false) {
+                return Object.keys(obj).map(function (key) {
+                    return obj[key];
+                });
+            } else {
+                return Object.keys(obj).map(function (key) {
+                    var value = obj[key];
+                    return angular.isObject(value) ?
+                      Object.defineProperty(value, '$key', { enumerable: false, value: key }) :
+          { $key: key, $value: value };
+                });
+            }
+        };
     });
+
+
+
+
+
 
     (function () {
 
@@ -306,3 +326,12 @@
 
 
     })();
+
+
+
+    //bootstrap nav menu hide on click
+    $(document).on('click', '.navbar-collapse.in', function (e) {
+        if ($(e.target).is('a')) {
+            $(this).collapse('hide');
+        }
+    });

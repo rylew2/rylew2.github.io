@@ -110,7 +110,7 @@
 
     </div>
     <div class="ghvmain col-lg-12">
-        <img src="https://www.angularjs.org/favicon.ico" <!--style="float:left; height:40px"--> />
+        <img src="https://www.angularjs.org/favicon.ico" style="float:left;" />
         <h1>ngular GitHub Browser</h1> <br />
         <a href="#/ghv/main">Back to Search</a>
 
@@ -138,7 +138,7 @@
                 <tbody>
            
 
-                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder | limitTo: 10" ng-click="changeRepo()">
+                    <tr ng-repeat="repo in repos | toArray |  orderBy:repoSortOrder | limitTo: 10" ng-click="changeRepo()">
 
                         <td>
                             <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
@@ -161,22 +161,22 @@
         </div>
              <div id="chart" class="col-md-9">
 
-                <h4 ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
-                <div>{{chartMessage}}</div>
+                <h4 style="text-align:center" ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
+                <div style="text-align:center">{{chartMessage}}</div>
      
             </div>
 
         <div class="col-md-9 barChartOuterDiv">
             <div class="barChart">
                 
-                <h4>Total Lines of Code by Language among Top 30 Repositories for {{user.name}}</h4>
+                <h4>Total Lines of Code by Language among Top {{langTotalCount}} Repositories for {{user.name}}</h4>
                 <p><span id="city"></span> - <span id="inches"></span></p>
             </div>
         </div>
 
     </div>
 
-
+    
  </div>
 
 
@@ -478,7 +478,7 @@
           .data(dataset)
           .enter()
           .append('rect')
-            .attr('ng-mouseover', 'barChartMouseover()')
+            .attr('class', 'barChartMouseover()')
           // Step 2: X & Y
           // >> X - Places the bars in horizontal order, based on number of
           //        points & the width of the chart
@@ -557,6 +557,7 @@
         stroke: black;
         shape-rendering: crispEdges;
       }
+ 
 
       text,
       .axis text {
@@ -579,3 +580,4 @@
     }
 
 </style>
+
