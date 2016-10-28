@@ -461,13 +461,14 @@
           .attr('height', height + margins.top + margins.bottom)
           .append('g')
           .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
-
+        
 
         var tooltip = d3.select('body').append('div')
         .style('position', 'absolute')
         .style('padding', '0 10px')
         .style('background', 'white')
         .style('opacity', 0)
+        
 
         // For each value in our dataset, places and styles a bar on the chart
 
@@ -477,7 +478,7 @@
           .data(dataset)
           .enter()
           .append('rect')
-
+            .attr('ng-mouseover', 'barChartMouseover()')
           // Step 2: X & Y
           // >> X - Places the bars in horizontal order, based on number of
           //        points & the width of the chart
@@ -574,6 +575,7 @@
         margin-top:2px;
         border: 1px solid black;
         height: 480px;
+        text-align:center;
     }
 
 </style>

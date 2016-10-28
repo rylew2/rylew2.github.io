@@ -115,10 +115,8 @@
             $q.all(promises).then(onLanguages, onError);
 
         };
-        
-
-    
-
+            
+        // 3.) get and format programming language data
         var onLanguages = function (data) {
 
             for (var i = 0; i < data.length; i++) {  
@@ -141,13 +139,16 @@
 
             }
             $scope.langTotals = a;
-            render(a);
-            $('rect').mouseenter(function () {
-                $('#city').html(this.className.animVal);
-                $('#inches').html($(this).attr('id'));
+            
+            a.sort(function (a, b) {
+                return b.snow - a.snow;
             });
 
-            
+            render(a );
+            $('rect').mouseenter(function () {
+                $('#city').html(this.className.animVal);
+                $('#inches').html($(this).attr('id').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' lines');
+            });
 
         }
 
@@ -187,13 +188,16 @@
             }
             else {
                // debugger;
-                $scope.chartMessage = "No languages used in this repository.";
+                $scope.chartMessage = "No languages associated with this repository.";
             }
 
 
 
         };
 
+        $scope.barChartMouseover = function () {
+            debugger;
+        };
 
         $scope.repoSortOrder = "-stargazers_count";
         github.getUser($routeParams.username).then(onUserComplete, onError);
