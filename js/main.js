@@ -131,8 +131,6 @@
                 $scope.repos[i].languages = o;
             
                 Object.keys(o).forEach(function (key, index) {
-                    // key: the name of the object key
-                    // index: the ordinal position of the key within the object
                     var lines = o[key];
                     var b = lookup(key);
                     if (!b[0]) {
@@ -147,10 +145,12 @@
 
 
             }
-           // debugger;
             $scope.langTotals = a;
             render(a);
-
+            $('rect').mouseenter(function () {
+                $('#city').html(this.className.animVal);
+                $('#inches').html($(this).attr('id'));
+            });
 
             
 

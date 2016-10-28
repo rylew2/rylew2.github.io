@@ -158,9 +158,9 @@
             <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
         </div>
    
-        <div ng-show="chartMessage==null" id="chart" class="col-md-9">
+        <div id="chart" class="col-md-9">
              <h4>Language Breakdown for {{thisRepo}}</h4>
-             <div>{{chartMessage}}</div>
+             <div ng-show="chartMessage==null" >{{chartMessage}}</div>
            
         </div>
         <div class="col-md-9 barChartOuterDiv">
@@ -526,16 +526,6 @@
           .attr('transform', 'translate(-70, -20)');
     }
 
-    $(function () {
-        // On document load, call the render() function to load the graph
-        //debugger;
-        //render();
-
-        $('rect').mouseenter(function () {
-            $('#city').html(this.className.animVal);
-            $('#inches').html($(this).attr('id'));
-        });
-    });
 
 </script>
 
