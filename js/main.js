@@ -114,18 +114,39 @@
         var a = [];
         var obj = {};
         var onLanguages = function (data) {
-            for (var i = 0; i < data.length; i++) {
-                debugger;
+            for (var i = 0; i < data.length; i++) {  
+                var o = data[i].data;
+                $scope.repos[i].languages = o;
 
-                
-                $scope.repos[i].languages = data[i].data;
+                for (var key in o) {
+                    if (data[i].data.hasOwnProperty(key)) {
+                        var lines = o[key];
+                        var found = false;
+
+                            debugger;
+               
+                        //if(a[0].filter( function(c) {return c.key === lines; ){
+
+                        //}
+                        //else{
+                        //    a.push({ key, lines });
+                        //}
+                        //a.push({ key, lines });
+
+
+                        debugger;
+                        //var b = {key, o[key]};
+                        //var pushMe = {key, data[i].data[key]};
+                       // a.push( pushMe );
+
+
+                    }
+                }
+
             }
             debugger;
            
 
-            objs.sort(function (a, b) {
-                 return a.last_nom > b.last_nom;
-            });
 
             
 
