@@ -45,7 +45,7 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
 
     // 3.) get and format programming language data
     var onLanguages = function (data) {
-        $scope.langTotalCount;
+        $scope.langTotalCount = data.length;
         for (var i = 0; i < data.length; i++) {
             var o = data[i].data;
             $scope.repos[i].languages = o;

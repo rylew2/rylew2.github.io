@@ -78,9 +78,18 @@
                     </tr>
                 </tbody>
             </table> <br />
-            <p style="font-size:smaller">Select anywhere on repository row to view language breakdown. <br />Click the repository name to view more details.</p>
+            <p style="font-size:smaller; width: 320px">Select anywhere on repository row to view language breakdown. <br />Click the repository name to view more details.</p>
+            
 
-            <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
+            <div class="stats" style="border: 1px solid black; width: 352px">
+                <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto" style="width:250px" />
+                <p ng-show="user.name">{{user.name}}</p>
+                <p ng-show="user.company"> Company: {{user.company}}</p>            
+                <p ng-show="user.location">{{user.location}}</p>
+                <p ng-show="user.blog"><a ng-href="user.blog">{{user.blog}}</a></p>
+                <p ng-show="user.bio"> {{user.bio}}</p>
+
+            </div>
         </div>
              <div id="chart" class="col-md-9">
 
