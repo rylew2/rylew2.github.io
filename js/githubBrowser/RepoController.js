@@ -25,8 +25,8 @@
 
 
 
-    var myapp = angular.module("rylew"); //just a reference to GitHubViewer not an instantiation/creation
+    //var myapp = angular.module("rylew"); //just a reference to GitHubViewer not an instantiation/creation
 
-    myapp.controller("RepoController", RepoController);
+    //myapp.controller("RepoController", RepoController);
 
 })();

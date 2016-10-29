@@ -133,9 +133,8 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
 
 });
 
-var myapp = angular.module("rylew"); //just a reference to GitHubViewer not an instantiation/creation
-
-myapp.controller("UserController", UserController);
+//var myapp = angular.module("rylew"); //just a reference to GitHubViewer not an instantiation/creation
+//app.controller("UserController", UserController);
 
 
 })();
