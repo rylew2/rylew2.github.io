@@ -33,12 +33,12 @@
                 controller: "MainController",
                 message: 'Viewing main'
             })
-            .when("/ghv/user/:username", { // : denotes a parameter
+            .when("/ghv/user/:username", { // : denotes a url parameter
                 templateUrl: "partials/githubBrowser/user.html",
                 controller: "UserController",
                 message: 'Viewing user'
             })
-            .when("/ghv/repo/:username/:reponame", { // : denotes a parameter
+            .when("/ghv/repo/:username/:reponame", { // :  denotes a url parameter
                 templateUrl: "partials/githubBrowser/repo.html",
                 controller: "RepoController",
                 message: 'Viewing repo'

@@ -3,7 +3,7 @@
 /* User Controller */
 
 (function() {
-
+     
 
 
 app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
