@@ -7,6 +7,7 @@
 
         var onRepo = function (data) {
             $scope.repo = data;
+            $scope.loading = null;
         };
 
         var onError = function (reason) {
@@ -19,6 +20,8 @@
 
         github.getRepoDetails(username, reponame)
         .then(onRepo, onError);
+
+        $scope.loading = "loading";
 
     });
     /* End Repo Controller*/

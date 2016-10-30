@@ -297,8 +297,11 @@ svg{
         </div>
 
     </div>
-
-    <div class="ghvmain col-lg-12">
+    <div class="loading" ng-show="loading!=null">
+        <!--ng-show="loading!=null" >-->
+        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%" />
+    </div>
+    <div class="ghvmain col-lg-12" ng-hide="loading!=null">
         <img src="https://www.angularjs.org/favicon.ico" style="float:left; height:40px" />
         <h1>ngular GitHub Browser</h1> <br />
         <a href="#/ghv/main">Back to Search</a> |
@@ -331,9 +334,9 @@ svg{
 
         <div id="chart" class="col-md-9">
 
-                <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
-                <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
-                <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
+            <label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
+            <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
+            <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
 
 
         </div>
