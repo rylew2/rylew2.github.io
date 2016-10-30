@@ -75,9 +75,8 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
             $('#city').html(this.className.animVal);
             $('#inches').html($(this).attr('id').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' lines');
         });
-
+        $scope.loading = null;
     }
-
 
     var onError = function (reason) {
         $scope.error = "Could not fetch the data from GitHub";
@@ -122,7 +121,7 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
     };
 
 
-
+    $scope.loading = "loading";
     $scope.repoSortOrder = "-stargazers_count";
     github.getUser($routeParams.username).then(onUserComplete, onError);
     $scope.chartMessage = "Please select a repository row.";

@@ -32,7 +32,10 @@
         </div>
 
     </div>
-    <div class="ghvmain col-lg-12">
+    <div class="loading" ng-show="loading!=null"> <!--ng-show="loading!=null" >-->
+        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>
+    </div>
+    <div class="ghvmain col-lg-12" ng-hide="loading!=null">
         <img src="https://www.angularjs.org/favicon.ico" style="float:left;" />
         <h1>ngular GitHub Browser</h1> <br />
         <a href="#/ghv/main">Back to Search</a>
@@ -42,7 +45,7 @@
             <div>
                 <p ng-show="user.message">{{user.message}}</p>
                 <h2> GitHub username: {{user.login}}</h2>
-                <h4>Top Repositories</h4>
+                <h4>Top {{ (repos | toArray |  orderBy:repoSortOrder | limitTo: 10).length }} Repositories</h4>
                
             </div>
           
@@ -86,7 +89,7 @@
                 <p ng-show="user.name">{{user.name}}</p>
                 <p ng-show="user.company"> Company: {{user.company}}</p>            
                 <p ng-show="user.location">{{user.location}}</p>
-                <p ng-show="user.blog"><a ng-href="user.blog">{{user.blog}}</a></p>
+                <p ng-show="user.blog"><a ng-href="{{user.blog}}">{{user.blog}}</a></p>
                 <p ng-show="user.bio"> {{user.bio}}</p>
 
             </div>
