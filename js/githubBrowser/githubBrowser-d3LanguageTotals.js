@@ -1,4 +1,6 @@
 ﻿
+
+
 function render(dataset) {
 
     // Dimensions for the chart: height, width, and space b/t the bars
@@ -127,3 +129,4 @@ function render(dataset) {
       .text('Lines of Code')
       .attr('transform', 'translate(-70, -20)');
 }
+

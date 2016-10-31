@@ -1,7 +1,5 @@
 ﻿(function () {
 
-
-
     /*Repo Controller*/
     app.controller('RepoController', function ($scope, github, $routeParams) {
 
@@ -14,12 +12,11 @@
             $scope.error = reason;
         };
 
-        //username and repo passed from user.html
+        //username and repo passed as URL route parameters from user.html
         var reponame = $routeParams.reponame;
         var username = $routeParams.username;
 
-        github.getRepoDetails(username, reponame)
-        .then(onRepo, onError);
+        github.getRepoDetails(username, reponame).then(onRepo, onError);
 
         $scope.loading = "loading";
 

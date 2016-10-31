@@ -1,4 +1,4 @@
-﻿d3.select("input[value=\"total\"]").property("checked", true);
+﻿
 
 var svg = d3.select("#chart")
     .append("svg").attr("ng-show", "chartMessage==null")
@@ -220,3 +220,5 @@ function change(data) {
 
 
 };
+
+
