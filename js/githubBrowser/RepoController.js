@@ -27,9 +27,4 @@
     /* End Repo Controller*/
 
 
-
-    //var myapp = angular.module("rylew"); //just a reference to GitHubViewer not an instantiation/creation
-
-    //myapp.controller("RepoController", RepoController);
-
 })();
