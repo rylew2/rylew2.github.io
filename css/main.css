@@ -206,10 +206,6 @@ footer div.col-lg-2{
 }*/
 
 
-
-
-
-
 /* GitHub Browser*/
 .ghvmain{
     margin-top: 10px;
@@ -238,20 +234,34 @@ footer div.col-lg-2{
 
 
 
+    /*.alternate tr:nth-child(2n) {
+  background-color: #ececec;
+}*/
 
-
-
-
-
-
-    .alternate tr:nth-child(2n) {
-  background-color: silver;
-}
-
-.alternate tr:nth-child(2n):hover, .alternate tr:hover {
+/*.alternate tr:nth-child(2n):hover, .alternate tr:hover {
   background: #fff0a7;
+  
 }
 
 .alternate tr {
   background-color: white;
+}*/
+
+   /* when smaller width -  */
+@media(min-width:767px) {
+   #mainNav {
+       padding: 12px;
+       -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+       -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+       transition: background .5s ease-in-out,padding .5s ease-in-out;
+   }
+
+
+
+
+
+nav.shrink {
+  /*min-height: 65px;*/
+  height: 55px;
+   transition: all 0.4s ease;
 }
