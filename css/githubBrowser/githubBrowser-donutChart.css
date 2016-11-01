@@ -57,7 +57,7 @@
     }
 
     table tbody tr:hover {
-        background: #fff0a7;
+        background: #fff0a7 !important;
     }
 
     .selected {

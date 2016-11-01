@@ -234,3 +234,24 @@ footer div.col-lg-2{
     list-style:none;
     
 }
+
+
+
+
+
+
+
+
+
+
+    .alternate tr:nth-child(2n) {
+  background-color: silver;
+}
+
+.alternate tr:nth-child(2n):hover, .alternate tr:hover {
+  background: #fff0a7;
+}
+
+.alternate tr {
+  background-color: white;
+}

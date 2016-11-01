@@ -5,6 +5,7 @@
 
         var onRepo = function (data) {
             $scope.repo = data;
+            $scope.contributorTotal = data.contributors.length;
             $scope.loading = null;
         };
 
