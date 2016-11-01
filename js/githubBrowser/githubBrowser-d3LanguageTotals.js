@@ -122,7 +122,14 @@ function render(dataset) {
     chart.append('g')
       .attr('class', 'axis')
       .attr('transform', 'translate(0,' + (height + 10) + ')')
-      .call(xAxis);
+      .call(xAxis)
+     .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function (d) {
+                return "rotate(-65)"
+            })  ;
 
     // Adds yAxis title
     chart.append('text')

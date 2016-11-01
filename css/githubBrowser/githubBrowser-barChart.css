@@ -15,14 +15,14 @@
         fill: orange;
       }
     .svgBarChart{
-        height: 500px !important;
+        height: 525px !important;
         padding-top: 8px;
     }
     .barChart{
         margin-left:63px;
         margin-top:2px;
         border: 1px solid black;
-        height: 480px;
+        height: 525px !important;
         text-align:center;
         width: 800px !important;
     }

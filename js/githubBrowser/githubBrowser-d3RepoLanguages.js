@@ -111,7 +111,12 @@ function change(data) {
     /* ------- TEXT LABELS -------*/
 
     var text = svg.select(".labelName").selectAll("text")
-        .data(pie(data), function (d) { return d.data.label });
+        .data(pie(data), function (d) { return d.data.label })
+	  .attr("dy", ".35em")
+	  .attr('text-anchor', 'middle')
+	  .text(function (d) { return (d.data.cars > 10000) ? d.data.make : null; });
+
+        
 
     text.enter()
         .append("text")
@@ -119,7 +124,17 @@ function change(data) {
         .text(function (d) {
             return (d.data.label + ": " + d.value + "%");
 
-        });
+        })
+         .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function (d) {
+                return "rotate(-65)"
+            });
+
+
+    
     //.attr("transform", function (d) {
     //    return "translate(" + pos.centroid(d) + ") " +
     //            "rotate(" + getAngle(d) + ")";
@@ -160,7 +175,7 @@ function change(data) {
         .remove();
 
 
-    alpha = .7;
+    alpha = .8;
     spacing = 11;
 
     function relax() {
