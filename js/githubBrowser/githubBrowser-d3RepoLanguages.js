@@ -117,7 +117,6 @@ function change(data) {
 	  .text(function (d) { return (d.data.cars > 10000) ? d.data.make : null; });
 
         
-
     text.enter()
         .append("text")
         .attr("dy", ".35em")
@@ -134,11 +133,7 @@ function change(data) {
             });
 
 
-    
-    //.attr("transform", function (d) {
-    //    return "translate(" + pos.centroid(d) + ") " +
-    //            "rotate(" + getAngle(d) + ")";
-    //})             ;
+
 
     function midAngle(d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;

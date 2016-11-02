@@ -18,12 +18,6 @@
 
             return $http.get(user.repos_url + clientSecret)
                         .then(function (response) {
-
-                            //for (var i = 0; i < response.data.length; i++) {
-                            //    var langURL = "https://api.github.com/repos/" + user + "/" + response.data[i].name + "/" + "languages" + clientSecret ;
-                            //    response.data[i].repoLanguages = $http.get(langURL );
-                            //}
-
                             return response.data;
                         });
         };
