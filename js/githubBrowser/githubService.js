@@ -41,10 +41,21 @@
                         });
         };
 
+
+        //return repos for user
+        var getLanguages = function (langURL) {
+
+            return $http.get(langURL + clientSecret)
+                        .then(function (response) {
+                            return response.data;
+                        });
+        };
+
         return {
             getUser: getUser,
             getRepos: getRepos,
-            getRepoDetails: getRepoDetails
+            getRepoDetails: getRepoDetails,
+            getLanguages: getLanguages
         };
 
     }

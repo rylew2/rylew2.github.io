@@ -37,7 +37,8 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
 
         for (var i = 0; i < data.length; i++) {
             var langURL = data[i].languages_url;
-            var promise = $http.get(langURL + clientSecret);
+            // var promise = $http.get(langURL + clientSecret);
+            var promise = github.getLanguages(langURL);
             promises.push(promise);
         }
         $q.all(promises).then(onLanguages, onError);
@@ -48,7 +49,7 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
     var onLanguages = function (data) {
         $scope.langTotalCount = data.length;
         for (var i = 0; i < data.length; i++) {
-            var o = data[i].data;
+            var o = data[i];
             $scope.repos[i].languages = o;
             Object.keys(o).forEach(function (key, index) {
                 var lines = o[key];
