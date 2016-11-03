@@ -4,230 +4,6 @@
 
 
 
- <script>
-    d3.select("input[value=\"total\"]").property("checked", true);
-
-    var svg = d3.select("#chart")
-        .append("svg")
-        .append("g")
-
-    svg.append("g")
-        .attr("class", "slices");
-    svg.append("g")
-        .attr("class", "labelName");
-    svg.append("g")
-        .attr("class", "labelValue");
-    svg.append("g")
-        .attr("class", "lines");
-
-    var width = 960/2.5,
-        height = 450/2.5,
-        radius = (Math.min(width, height) / 2) + 20;
-
-    var pie = d3.layout.pie()
-        .sort(null)
-        .value(function (d) {
-            return d.value;
-        });
-
-    var arc = d3.svg.arc()
-        .outerRadius(radius * 0.8)
-        .innerRadius(radius * 0.4);
-
-    var outerArc = d3.svg.arc()
-        .innerRadius(radius * 0.9)
-        .outerRadius(radius * 0.9);
-
-    var legendRectSize = (radius * 0.05);
-    var legendSpacing = radius * 0.02;
-
-
-    var div = d3.select("body").append("div").attr("class", "toolTip");
-
-    svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    var colorRange = d3.scale.category20();
-    var color = d3.scale.ordinal()
-        .range(colorRange.range());
-
-
-    datasetTotal = [
-            { label: "Category 1", value: 19 },
-            { label: "Category 2", value: 5 },
-            { label: "Category 5", value: 19 },
-            { label: "Category 6", value: 27 }
-    ];
-
-    datasetOption1 = [
-            { label: "Category 1", value: 22 },
-            { label: "Category 2", value: 33 },
-   
-    ];
-
-    datasetOption2 = [
-
-            { label: "Category 2", value: 20 },
-            { label: "Category 3", value: 30 },
-            { label: "Category 4", value: 5 },
-            { label: "Category 5", value: 12 },
-            { label: "Category 6", value: 23 }
-    ];
-
-    change(datasetTotal);
-
-
-    d3.selectAll("input")
-        .on("change", selectDataset);
-
-    function selectDataset() {
-        var value = this.value;
-        if (value == "total") {
-            change(datasetTotal);
-        }
-        else if (value == "option1") {
-            change(datasetOption1);
-        }
-        else if (value == "option2") {
-            change(datasetOption2);
-        }
-    }
-
-    function change(data) {
-
-        /* ------- PIE SLICES -------*/
-        var slice = svg.select(".slices").selectAll("path.slice")
-            .data(pie(data), function (d) { return d.data.label });
-
-        slice.enter()
-            .insert("path")
-            .style("fill", function (d) { return color(d.data.label); })
-            .attr("class", "slice");
-
-        slice
-            .transition().duration(1000)
-            .attrTween("d", function (d) {
-                this._current = this._current || d;
-                var interpolate = d3.interpolate(this._current, d);
-                this._current = interpolate(0);
-                return function (t) {
-                    return arc(interpolate(t));
-                };
-            })
-        slice
-            .on("mousemove", function (d) {
-                div.style("left", d3.event.pageX + 10 + "px");
-                div.style("top", d3.event.pageY - 25 + "px");
-                div.style("display", "inline-block");
-                div.html((d.data.label) + "<br>" + (d.data.value) + "%");
-            });
-        slice
-            .on("mouseout", function (d) {
-                div.style("display", "none");
-            });
-
-        slice.exit()
-            .remove();
-
-        var legend = svg.selectAll('.legend')
-            .data(color.domain())
-            .enter()
-            .append('g')
-            .attr('class', 'legend')
-            .attr('transform', function (d, i) {
-                var height = legendRectSize + legendSpacing;
-                var offset = height * color.domain().length / 2;
-                var horz = -3 * legendRectSize;
-                var vert = i * height - offset;
-                return 'translate(' + horz + ',' + vert + ')';
-            });
-
-        legend.append('rect')
-            .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
-            .style('fill', color)
-            .style('stroke', color);
-
-        legend.append('text')
-            .attr('x', legendRectSize + legendSpacing)
-            .attr('y', legendRectSize - legendSpacing)
-            .text(function (d) { return d; });
-
-        /* ------- TEXT LABELS -------*/
-
-        var text = svg.select(".labelName").selectAll("text")
-            .data(pie(data), function (d) { return d.data.label });
-
-        text.enter()
-            .append("text")
-            .attr("dy", ".35em")
-            .text(function (d) {
-                return (d.data.label + ": " + d.value + "%");
-            });
-
-        function midAngle(d) {
-            return d.startAngle + (d.endAngle - d.startAngle) / 2;
-        }
-
-        text
-            .transition().duration(1000)
-            .attrTween("transform", function (d) {
-                this._current = this._current || d;
-                var interpolate = d3.interpolate(this._current, d);
-                this._current = interpolate(0);
-                return function (t) {
-                    var d2 = interpolate(t);
-                    var pos = outerArc.centroid(d2);
-                    pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-                    return "translate(" + pos + ")";
-                };
-            })
-            .styleTween("text-anchor", function (d) {
-                this._current = this._current || d;
-                var interpolate = d3.interpolate(this._current, d);
-                this._current = interpolate(0);
-                return function (t) {
-                    var d2 = interpolate(t);
-                    return midAngle(d2) < Math.PI ? "start" : "end";
-                };
-            })
-            .text(function (d) {
-                return (d.data.label + ": " + d.value + "%");
-            });
-
-
-        text.exit()
-            .remove();
-
-        /* ------- SLICE TO TEXT POLYLINES -------*/
-
-        var polyline = svg.select(".lines").selectAll("polyline")
-            .data(pie(data), function (d) { return d.data.label });
-
-        polyline.enter()
-            .append("polyline");
-
-        polyline.transition().duration(1000)
-            .attrTween("points", function (d) {
-                this._current = this._current || d;
-                var interpolate = d3.interpolate(this._current, d);
-                this._current = interpolate(0);
-                return function (t) {
-                    var d2 = interpolate(t);
-                    var pos = outerArc.centroid(d2);
-                    pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
-                    return [arc.centroid(d2), outerArc.centroid(d2), pos];
-                };
-            });
-
-        polyline.exit()
-            .remove();
-    };
-
-
-
-</script>
-
-
 <div class="container">
     <div class="row">
 
@@ -298,3 +74,187 @@
 
     </div>
 </div>
+
+
+
+
+<!--<style>
+
+
+    text {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .toolTip {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .legend {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 60%;
+    }
+
+    text {
+        font: 10px sans-serif;
+    }
+
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    .axis path {
+        fill: none;
+        stroke: #000;
+    }
+
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+</style>-->
+
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
+<script>
+    function wrap(text, width) {
+        text.each(function () {
+            var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    y = text.attr("y"),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
+    }
+    dataset = [
+        { label: "Art and Humanities", "Not Satisfied": 25, "Not Much Satisfied": 40, "Satisfied": 15, "Very Satisfied": 20 },
+        { label: "Sciences", "Not Satisfied": 5, "Not Much Satisfied": 30, "Satisfied": 50, "Very Satisfied": 15 },
+        { label: "Health Sciences", "Not Satisfied": 20, "Not Much Satisfied": 30, "Satisfied": 40, "Very Satisfied": 10 },
+        { label: "Social Sciences", "Not Satisfied": 10, "Not Much Satisfied": 40, "Satisfied": 45, "Very Satisfied": 5 },
+        { label: "Architecture and Engineering", "Not Satisfied": 5, "Not Much Satisfied": 15, "Satisfied": 40, "Very Satisfied": 40 },
+    ];
+    var margin = { top: (parseInt(d3.select('#chart').style('height'), 10) / 20), right: (parseInt(d3.select('#chart').style('width'), 10) / 20), bottom: (parseInt(d3.select('#chart').style('height'), 10) / 6), left: (parseInt(d3.select('#chart').style('width'), 10) / 20) },
+            width = parseInt(d3.select('#chart').style('width'), 10) - margin.left - margin.right,
+            height = parseInt(d3.select('#chart').style('height'), 10) - margin.top - margin.bottom;
+    var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1, .3);
+    var y = d3.scale.linear()
+            .rangeRound([height, 0]);
+    var colorRange = d3.scale.category20();
+    var color = d3.scale.ordinal()
+            .range(colorRange.range());
+    var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+    var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .tickFormat(d3.format(".2s"));
+    var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var divTooltip = d3.select("#chart").append("div").attr("class", "toolTip");
+    color.domain(d3.keys(dataset[0]).filter(function (key) { return key !== "label"; }));
+    dataset.forEach(function (d) {
+        var y0 = 0;
+        d.values = color.domain().map(function (name) { return { name: name, y0: y0, y1: y0 += +d[name] }; });
+        d.total = d.values[d.values.length - 1].y1;
+    });
+    x.domain(dataset.map(function (d) { return d.label; }));
+    y.domain([0, d3.max(dataset, function (d) { return d.total; })]);
+    svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+    svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 9)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Satisfaction %");
+    var bar = svg.selectAll(".label")
+            .data(dataset)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform", function (d) { return "translate(" + x(d.label) + ",0)"; });
+    svg.selectAll(".x.axis .tick text")
+            .call(wrap, x.rangeBand());
+
+    var bar_enter = bar.selectAll("rect")
+    .data(function (d) { return d.values; })
+    .enter();
+
+    bar_enter.append("rect")
+        .attr("width", x.rangeBand())
+        .attr("y", function (d) { return y(d.y1); })
+        .attr("height", function (d) { return y(d.y0) - y(d.y1); })
+        .style("fill", function (d) { return color(d.name); });
+
+    bar_enter.append("text")
+        .text(function (d) { return d3.format(".2s")(d.y1 - d.y0) + "%"; })
+        .attr("y", function (d) { return y(d.y1) + (y(d.y0) - y(d.y1)) / 2; })
+        .attr("x", x.rangeBand() / 3)
+        .style("fill", '#ffffff');
+
+    bar
+            .on("mousemove", function (d) {
+                divTooltip.style("left", d3.event.pageX + 10 + "px");
+                divTooltip.style("top", d3.event.pageY - 25 + "px");
+                divTooltip.style("display", "inline-block");
+                var elements = document.querySelectorAll(':hover');
+                l = elements.length
+                l = l - 1
+                element = elements[l].__data__
+                value = element.y1 - element.y0
+                divTooltip.html((d.label) + "<br>" + element.name + "<br>" + value + "%");
+            });
+    bar
+            .on("mouseout", function (d) {
+                divTooltip.style("display", "none");
+            });
+    svg.append("g")
+            .attr("class", "legendLinear")
+            .attr("transform", "translate(0," + (height + 30) + ")");
+    var legend = d3.legend.color()
+            .shapeWidth(height / 4)
+            .shapePadding(10)
+            .orient('horizontal')
+            .scale(color);
+    svg.select(".legendLinear")
+            .call(legend);
+</script>-->

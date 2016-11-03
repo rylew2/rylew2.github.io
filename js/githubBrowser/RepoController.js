@@ -14,15 +14,30 @@
         };
 
         var onStats = function (data) {
+            $scope.commitStats = [];
+            var responseData = data.data;
+            var obj = {};
+            for (var i = 0; i < responseData.length; i++) {
+                obj = {};
+                obj.a = 0, obj.d = 0, obj.author="", obj.total = 0;
+                obj.author = responseData[i].author.login;
+                obj.total = responseData[i].total;
 
-            for (var i = 0; i < data.data.length; i++) {
-                var author = data.data[i].author.login;
-                var total = data.data[i].total;
+                var weeks = responseData[i].weeks;
 
-                for (var j = 0; j < data.data[i].weeks.length; j++) {
+                for (var j = 0; j < responseData[i].weeks.length; j++) {
 
+                    obj.a = obj.a + weeks[j].a;
+                
+                    obj.d = obj.d + weeks[j].d;
+                    
                 }
+                $scope.commitStats.push(obj);
+                
             }
+
+            var zzzz = 2;
+
         };
 
         var onError = function (reason) {
