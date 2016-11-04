@@ -1,0 +1,61 @@
+﻿.axis path,
+      .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+ 
+
+      text,
+      .axis text {
+        font-size: 11px;
+      }
+
+      rect:hover {
+        fill: orange;
+      }
+    .svgBarChart{
+        height: 525px !important;
+        padding-top: 8px;
+    }
+    .barChart{
+        margin-left:63px;
+        margin-top:2px;
+        border: 1px solid black;
+        height: 525px !important;
+        text-align:center;
+        width: 800px !important;
+    }
+
+    div#chart{
+        border:solid 1px black;
+        margin-left:10px;
+        width: 770px;
+        height: 550px !important;
+    }
+
+    svg {
+        font: 10px sans-serif;
+        shape-rendering: crispEdges;
+        /*margin-top:20px;*/
+        margin-bottom: 30px;
+    }
+
+  .axis path,
+  .axis line {
+        fill: none;
+        stroke: #000;
+    }
+ 
+  path.domain {
+    stroke: none;
+  }
+ 
+  .y .tick line {
+    stroke: #ddd;
+  }
+
+  .dimple-title{
+      font-weight: 900;
+      margin-top:15px;
+  }
