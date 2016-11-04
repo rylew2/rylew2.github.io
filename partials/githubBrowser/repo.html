@@ -45,11 +45,11 @@
 
         <br />
 
-        <!-- By default API data comes paginated -->
-        <h3 ng-if="contributorTotal = 1"> Only {{contributorTotal}} Contributor </h3>
+        <h3 ng-if="contributorTotal < 1"> {{contributorTotal}} Contributors :(  </h3> <p ng-if="contributorTotal < 1">GitHub needs at least one non-empty commit to show stats.</p>
+        <h3 ng-if="contributorTotal == 1"> Only {{contributorTotal}} Contributor </h3>
         <h3 ng-if="contributorTotal > 1 && contributorTotal < 30">Just {{contributorTotal}} Contributors </h3>
         <h3 ng-if="contributorTotal >=30">Top {{contributorTotal}} Contributors </h3>
-        <table border=".5" class="col-md-3">
+        <table border=".5" class="col-md-3" >
             <thead>
                 <tr>
                     <th>Username</th>
@@ -59,7 +59,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in repo.contributors" class="{{user.login}}">
-                    <td><a href="#/ghv/user/{{user.login}}">{{user.login}}</a></td>
+                    <td><a href="#ghv/user/{{user.login}}">{{user.login}}</a></td>
                     <td>
                         <img width="150px" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
                     </td>

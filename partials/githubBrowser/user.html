@@ -38,7 +38,7 @@
     <div class="ghvmain col-lg-12" ng-hide="loading!=null">
         <img src="https://www.angularjs.org/favicon.ico" style="float:left;" />
         <h1>ngular GitHub Browser</h1> <br />
-        <a href="#/ghv/main">Back to Search</a>
+        <a href="#ghv/main">Back to Search</a>
 
         <div>
             <!-- string is  -->
@@ -67,7 +67,7 @@
                     <tr ng-repeat="repo in repos | toArray |  orderBy:repoSortOrder | limitTo: 10" ng-click="changeRepo()">
 
                         <td>
-                            <a href="#/ghv/repo/{{user.login}}/{{repo.name}}">
+                            <a href="#ghv/repo/{{user.login}}/{{repo.name}}" data-target="#ghv/repo/">
                                 {{repo.name}}
                             </a>
                         </td>

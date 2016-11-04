@@ -53,7 +53,6 @@
     });
 
 
-
     //bootstrap nav menu hide on click
     $(document).on('click', '.navbar-collapse.in', function (e) {
         if ($(e.target).is('a')) {

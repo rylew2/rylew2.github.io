@@ -1,36 +1,35 @@
 ﻿(function () {
 
     /*Repo Controller*/
-    app.controller('RepoController', function ($scope, github, $routeParams, $http, $timeout) {
-
-     
-
+    app.controller('RepoController', function ($scope, github, $routeParams,  $http, $timeout) {
 
         var onContributors = function (data) {
-
-
             $scope.repo = data;
-          //  debugger;
+          
             $scope.contributorTotal = data.contributors.length;
             $scope.loading = null;
 
             var clientSecret = '?client_id=9b254584c151259f146a&client_secret=552ead4d53b54ebd99adf72edd017626c5f496cf';
             var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors' + clientSecret;
-            $http.get(langURL).then(function (response) {
-                if (response.status == 202) {
-                  //  debugger;
-              
-                    $timeout(function () {
-                        $scope.chartMessage = null;
-                        $http.get(langURL).then(onStats, onError);
-                    }, 3000);
-                   
+            
+            //Statistics come back with 202 status code while github computes
+            // Poll until status is 200
+             var doPoll = function () {
+                    $http.get(langURL).then(function (response) {
+                        if (response.status == 202) {
+                            $scope.chartMessage = null;
+                            $timeout(doPoll , 1000);
+                        }
+                        else if (response.status == 200) {
+                            onStats(response);
+                        }
+                    });
                 }
-                else if (response.status == 200) {
-                    onStats(response);
-                }
-            });
-        };
+                doPoll();
+
+
+
+        }; //end onContributors
 
         var onStats = function (data) {
             $scope.chartMessage = "resolved"
@@ -72,9 +71,7 @@
                          User: $scope.commitStats[i].author.toString(),
                          MyValue: "Deletions"
                      }
-                     );
-
-                    
+                     );   
 
                 }            
             }
