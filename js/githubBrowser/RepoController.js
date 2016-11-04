@@ -53,12 +53,14 @@
             }
 
             var chartData = [];
-            var counter = 0;
+            
+
+            $scope.statUserCount = 0;
             for (var i = $scope.commitStats.length-1; (i > ($scope.commitStats.length -6)) ; i--) {
                 
      
                 if ( ($scope.commitStats[i] != undefined) && i>=0) {
-                    counter++;
+                    $scope.statUserCount++;
                     chartData.push(
                         {
                             Tasks: $scope.commitStats[i].a.toString(),
@@ -77,7 +79,7 @@
 
                 }            
             }
-            $scope.statUserCount = counter;
+
             dimpleStacked(chartData);
 
 
