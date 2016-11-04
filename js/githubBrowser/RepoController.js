@@ -21,7 +21,7 @@
                   //  debugger;
               
                     $timeout(function () {
-                        $scope.chartMessage = "Waiting on Github to compute stats...";
+                        $scope.chartMessage = null;
                         $http.get(langURL).then(onStats, onError);
                     }, 3000);
                    
@@ -33,7 +33,7 @@
         };
 
         var onStats = function (data) {
-           $scope.chartMessage = "resolved"
+            $scope.chartMessage = "resolved"
             $scope.commitStats = [];
             var responseData = data.data;
             var obj = {};

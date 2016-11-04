@@ -37,8 +37,8 @@
         <h2>{{repo.name}}</h2>
 
         <div>
-            <span ng-show="repo.open_issues_count">Open Issues: {{repo.open_issues_count}} |</span> 
-            <span ng-show="repo.watchers">Watchers: {{repo.watchers}} |</span> 
+            <span ng-show="repo.open_issues_count">Open Issues: {{repo.open_issues_count}} </span> <span ng-show="repo.open_issues_count && repo.watchers" >|</span> 
+            <span ng-show="repo.watchers">Watchers: {{repo.watchers}} </span><span ng-show="repo.forks && repo.watchers">|</span> 
             <span ng-show="repo.forks">Forks: {{repo.watchers}} </span>
 
         </div>
@@ -68,8 +68,11 @@
             </tbody>
         </table>
 
-        <div id="chart" class="col-md-9" style="height:400px">
-            <h4 style="text-align:center" >Top {{sdaf}} File Adders/Deleters {{thisRepo}}</h4>
+        <div id="chart" class="col-md-9" style="height:400px">          
+            <h4 style="text-align:center" ng-show="chartMessage">Top {{sdaf}} File Adders/Deleters {{thisRepo}}</h4>
+
+            <h4 style="text-align:center" ng-show="chartMessage==null">Waiting for GitHub to compute statistics...</h4>
+            <img ng-show="chartMessage==null" src="../../img/gears.svg" style=""/>
 
         </div>
 

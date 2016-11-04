@@ -59,3 +59,9 @@
       font-weight: 900;
       margin-top:15px;
   }
+
+  #chart img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
