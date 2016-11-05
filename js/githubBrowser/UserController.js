@@ -74,9 +74,28 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
 
         render(a);
         $('rect').mouseenter(function () {
+          //  debugger;
             $('#city').html(this.className.animVal);
             $('#inches').html($(this).attr('id').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' lines');
         });
+
+        $('.langTotalText').mouseenter(function () {
+            var t = this.innerHTML;
+            //debugger;
+            var lines = $('rect.' + t)[0].id;
+            $('#city').html(t);
+            $('#inches').html(lines.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' lines');
+           
+        });
+
+        //$('.langTotalText').mouseout(function () {
+            
+        //    var t = this.innerHTML;
+        //    $('rect.' + t)[0].removeClass('textHovered');
+        //    debugger;
+        //});
+
+
         $scope.loading = null;
     }
 
@@ -85,7 +104,7 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
         $scope.chartMessage = "Error returning Github data."
     };
 
-    $scope.changeRepo = function () {
+    $scope.changeRepo = function (event) {
 
         var dataset = [];
         var total = 0;

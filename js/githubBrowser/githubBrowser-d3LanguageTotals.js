@@ -129,7 +129,7 @@ function render(dataset) {
             .attr("dy", ".15em")
             .attr("transform", function (d) {
                 return "rotate(-65)"
-            })  ;
+            }).attr("class", "langTotalText");
 
     // Adds yAxis title
     chart.append('text')

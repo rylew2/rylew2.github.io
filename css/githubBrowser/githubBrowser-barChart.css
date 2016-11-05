@@ -14,6 +14,13 @@
       rect:hover {
         fill: orange;
       }
+      text:hover{
+          fill: orange;
+      }
+
+      rect.textHovered{
+          fill: orange;
+      }
     .svgBarChart{
         height: 525px !important;
         padding-top: 8px;
@@ -22,7 +29,7 @@
         margin-left:63px;
         margin-top:2px;
         border: 1px solid black;
-        height: 525px !important;
+        height: 580px !important;
         text-align:center;
         width: 800px !important;
     }

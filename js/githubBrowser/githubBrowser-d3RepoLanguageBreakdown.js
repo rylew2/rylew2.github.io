@@ -37,7 +37,13 @@ var legendSpacing = radius * 0.02;
 
 var div = d3.select("body").append("div").attr("class", "toolTip");
 
-svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+//var width = 960 / 2,
+//    height = 450 / 2,
+//    radius = (Math.min(width, height) / 2) + 20;
+
+svg.attr("transform", "translate(" + width / 2 + "," + ((height / 2) + 55) + ")");
 
 var colorRange = d3.scale.category20();
 var color = d3.scale.ordinal()
@@ -130,7 +136,7 @@ function change(data) {
             .attr("dy", ".15em")
             .attr("transform", function (d) {
                 return "rotate(-65)"
-            });
+            })     ;
 
 
 
