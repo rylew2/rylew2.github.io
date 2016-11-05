@@ -70,7 +70,7 @@
 
         <div id="chart" class="col-md-9" style="height:400px; text-align:center">
             <h4 ng-show="statUserCount==0">No user stats available.</h4>
-            <h4  ng-show="chartMessage && statUserCount>0">Top {{statUserCount}} File Adders/Deleters {{thisRepo}}</h4>
+            <h4  ng-show="chartMessage && statUserCount>0">Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since {{firstDate}}</h4>
 
             <h4 ng-show="chartMessage==null && contributorTotal>0">Waiting for GitHub to compute statistics...</h4>
             <img ng-show="chartMessage==null && contributorTotal>0" src="../../img/gears.svg" style="" />

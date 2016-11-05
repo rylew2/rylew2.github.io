@@ -45,6 +45,10 @@
                 var weeks = responseData[i].weeks;
 
                 for (var j = 0; j < responseData[i].weeks.length; j++) {
+                    if (j == 0) {
+                        $scope.firstDate = timeConverter( weeks[j].w ) ;
+                    }
+
                     obj.a = obj.a + weeks[j].a;               
                     obj.d = obj.d + weeks[j].d;                    
                 }
@@ -99,18 +103,25 @@
 
 
         /* Convert unix time from github api to date */
-        //function timeConverter(UNIX_timestamp) {
-        //    var a = new Date(UNIX_timestamp * 1000);
-        //    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        //    var year = a.getFullYear();
-        //    var month = months[a.getMonth()];
-        //    var date = a.getDate();
-        //    var hour = a.getHours();
-        //    var min = a.getMinutes();
-        //    var sec = a.getSeconds();
-        //    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
-        //    return time;
-        //}
+        function timeConverter(UNIX_timestamp) {
+            var a = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            var sec = a.getSeconds();
+            //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+            var time = getOrdinal(date) + ' ' + month + ' ' + year;
+            return time;
+
+            function getOrdinal(n) {
+                var s = ["th", "st", "nd", "rd"],
+                v = n % 100;
+                return n + (s[(v - 20) % 10] || s[v] || s[0]);
+            }
+        }
 
 
 
