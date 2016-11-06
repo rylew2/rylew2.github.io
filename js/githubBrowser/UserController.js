@@ -100,8 +100,10 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
     }
 
     var onError = function (reason) {
-        $scope.error = "Could not fetch the data from GitHub";
-        $scope.chartMessage = "Error returning Github data."
+
+        $scope.error = "Could not find this user or error returning data from GitHub.";
+        $scope.chartMessage = "Error returning Github data.";
+
     };
 
     $scope.changeRepo = function (event) {

@@ -32,9 +32,11 @@
         </div>
 
     </div>
-    <div class="loading" ng-show="loading!=null"> <!--ng-show="loading!=null" >-->
+    <div class="loading" ng-show="loading!=null && error==null"> <!--ng-show="loading!=null" >-->
         <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>
     </div>
+    <p ng-show="error!=null" style="color:red">{{error}}</p>
+    <a ng-show="error!=null" href="#ghv/main">Back to Search</a>
     <div class="ghvmain col-lg-12" ng-hide="loading!=null">
         <img src="https://www.angularjs.org/favicon.ico" style="float:left;" />
         <h1>ngular GitHub Browser</h1> <br />
