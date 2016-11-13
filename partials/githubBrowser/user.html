@@ -38,7 +38,7 @@
     <p ng-show="error!=null" style="color:red">{{error}}</p>
     <a ng-show="error!=null" href="#ghv/main">Back to Search</a>
     <div class="ghvmain col-lg-12" ng-hide="loading!=null">
-        <img src="https://www.angularjs.org/favicon.ico" style="float:left;" />
+        <img src="/img/favicon.ico" style="float:left; height:40px" />
         <h1>ngular GitHub Browser</h1> <br />
         <a href="#ghv/main" >Back to Search</a>
 
@@ -55,7 +55,7 @@
 
 
         <div class="col-md-3" style="padding-left:0px !important">
-            <table border=".5" ng-show="user" style="width:352px;" class="alternate">
+            <table border=".5" ng-show="user" style="width:352px;" class="">
                 <thead>
                     <tr>
                         <th>Repository Name</th>
@@ -96,16 +96,13 @@
 
             </div>
         </div>
-             <div id="chart" class="col-md-9">
-
-                <h4 style="text-align:center" ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
-                <div style="text-align:center">{{chartMessage}}</div>
-     
-            </div>
+         <div id="chart" class="col-md-9">
+            <h4 style="text-align:center" ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
+            <div style="text-align:center">{{chartMessage}}</div>
+         </div>
 
         <div class="col-md-9 barChartOuterDiv">
-            <div class="barChart">
-                
+            <div class="barChart">                
                 <h4>Total Lines of Code by Language among Top {{langTotalCount}} Repositories for {{user.name}}</h4>
                 <p><span id="city"></span> - <span id="inches"></span></p>
             </div>
