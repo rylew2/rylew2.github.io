@@ -61,12 +61,7 @@
         background: #b7d3f5;
     }
 
-    div#chart {
-        border: 1px solid black;
-        width: 597px;
-        margin-left: 78px;
-        height: 390px;
-    }
+
 
     svg {
         padding-left: 32px;
@@ -75,4 +70,22 @@
                 width: 100%;
         height: 100%;
     }
+@media screen and (min-width: 1200px) {
+    div#chart {
+        border: 1px solid black;
+        width: 597px;
+        margin-left: 78px;
+        height: 390px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    
+        div#chart {
+        border: 1px solid black;
+        width: 597px;
+        margin-left: 0px;
+        height: 390px;
+        margin-bottom: 10px;
+    }
+}
 
