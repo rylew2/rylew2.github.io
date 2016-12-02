@@ -9,5 +9,5 @@ My Personal Website
 
 ToDo:
 --------
--Consider porting to Node project <br/>
+-Port to a gulp project instead of .Net <br/>
 -Switch over to SASS
