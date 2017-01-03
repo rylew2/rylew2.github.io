@@ -1,4 +1,4 @@
- (function($) {
+(function($) {
     "use strict"; // Start of use strict
       
     // jQuery for page scrolling feature - requires jQuery Easing plugin
@@ -7,7 +7,7 @@
         $('html, body').stop().animate({
             scrollTop: ($($anchor.attr('href')).offset().top - 5)
         }, 1250, 'easeInOutExpo');
-        event.preventDefault(); 
+        event.preventDefault();
     });
 
     // Highlight the top nav as scrolling occurs
