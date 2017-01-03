@@ -3,11 +3,11 @@
     //Revealing module pattern
     //Get user and repos for user
     var github = function ($http) {
-        var clientSecret = '?client_id=9b254584c151259f146a&client_secret=552ead4d53b54ebd99adf72edd017626c5f496cf';
+      
 
         //Return github user profile
         var getUser = function (username) {
-            return $http.get("https://api.github.com/users/" + username + clientSecret)
+            return $http.get("https://api.github.com/users/" + username )
                   .then(function (response) {
                       return response.data;
                   });
@@ -16,7 +16,7 @@
         //return repos for user
         var getRepos = function (user) {
 
-            return $http.get(user.repos_url + clientSecret)
+            return $http.get(user.repos_url )
                         .then(function (response) {
                             return response.data;
                         });
@@ -30,10 +30,10 @@
 
             //Chained promises
             //each return is the input to the next success function
-            return $http.get(repoUrl + clientSecret)
+            return $http.get(repoUrl)
                         .then(function (response) {
                             repo = response.data;
-                            return $http.get(repoUrl + "/contributors" + clientSecret);
+                            return $http.get(repoUrl + "/contributors" );
                         })
                         .then(function (response) {
                             repo.contributors = response.data;
@@ -45,7 +45,7 @@
         //return repos for user
         var getLanguages = function (langURL) {
 
-            return $http.get(langURL + clientSecret)
+            return $http.get(langURL )
                         .then(function (response) {
                             return response.data;
                         });
