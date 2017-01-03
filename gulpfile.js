@@ -31,12 +31,12 @@ if (env === 'development') {
 
 jsSources = [ 'js/**/**.js']; //** for all subfolders
 
-gulp.task('js', function () {
-    gulp.src(jsSources)
-    .pipe(concat('combinedTest.js'))
-    .pipe(gulp.dest('js/'))
-    .pipe(connect.reload())
-});
+//gulp.task('js', function () {
+//    gulp.src(jsSources)
+//    .pipe(concat('combinedTest.js'))
+//    .pipe(gulp.dest('js/'))
+//    .pipe(connect.reload())
+//});
 
 gulp.task('connect', function () {
     connect.server({
