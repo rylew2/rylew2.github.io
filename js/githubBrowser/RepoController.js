@@ -9,8 +9,8 @@
             $scope.contributorTotal = data.contributors.length;
             $scope.loading = null;
 
-            var clientSecret = '?client_id=9b254584c151259f146a&client_secret=552ead4d53b54ebd99adf72edd017626c5f496cf';
-            var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors' + clientSecret;
+  
+            var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors';
             
             //Statistics come back with 202 status code while github computes
             // Poll until status is 200
