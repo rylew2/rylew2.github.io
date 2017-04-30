@@ -1,0 +1,26 @@
+{
+  "name": "rylew2.github.io",
+  "version": "1.0.0",
+  "description": "My Personal Website\r ====================",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rylew2/rylew2.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rylew2/rylew2.github.io/issues"
+  },
+  "homepage": "https://github.com/rylew2/rylew2.github.io#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^2.1.2"
+  }
+}

@@ -1,13 +1,13 @@
 ﻿var gulp = require('gulp'),
-    gutil = require('gulp-util'),
+    // gutil = require('gulp-util'),
     browserify = require('gulp-browserify'),
     connect = require('gulp-connect'),
-    gulpif = require('gulp-if'),
-    uglify = require('gulp-uglify'),
-    minifyHTML = require('gulp-minify-html'),
-    jsonminify = require('gulp-jsonminify'),
-    imagemin = require('gulp-imagemin'),
-    pngcrush = require('imagemin-pngcrush'),
+    // gulpif = require('gulp-if'),
+    // uglify = require('gulp-uglify'),
+    // minifyHTML = require('gulp-minify-html'),
+    // jsonminify = require('gulp-jsonminify'),
+    // imagemin = require('gulp-imagemin'),
+    // pngcrush = require('imagemin-pngcrush'),
     concat = require('gulp-concat');
 
 var env,
@@ -31,12 +31,12 @@ if (env === 'development') {
 
 jsSources = [ 'js/**/**.js']; //** for all subfolders
 
-//gulp.task('js', function () {
-//    gulp.src(jsSources)
-//    .pipe(concat('combinedTest.js'))
-//    .pipe(gulp.dest('js/'))
-//    .pipe(connect.reload())
-//});
+gulp.task('js', function () {
+   gulp.src(jsSources)
+   .pipe(concat('combinedTest.js'))
+   .pipe(gulp.dest('js/'))
+   .pipe(connect.reload())
+});
 
 gulp.task('connect', function () {
     connect.server({
