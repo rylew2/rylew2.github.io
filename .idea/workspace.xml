@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c557550-1e89-4103-bade-cb9d051a8df6" name="Default" comment="" />
+    <list default="true" id="9c557550-1e89-4103-bade-cb9d051a8df6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -283,7 +285,7 @@
       <updated>1493587583097</updated>
       <workItem from="1493587584234" duration="2620000" />
       <workItem from="1493594051482" duration="49000" />
-      <workItem from="1495267012959" duration="12560000" />
+      <workItem from="1495267012959" duration="12719000" />
     </task>
     <task id="LOCAL-00001" summary="update api to use heroku">
       <created>1495304093752</created>
@@ -303,7 +305,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15229000" />
+    <option name="totallyTimeSpent" value="15388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
