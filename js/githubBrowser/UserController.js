@@ -3,8 +3,7 @@
 /* User Controller */
 
 (function() {
-     
-    
+
 
 
 app.controller('UserController', function ($scope, github, $routeParams, $http, $q) {
@@ -29,7 +28,6 @@ app.controller('UserController', function ($scope, github, $routeParams, $http, 
 
     // 2.) get all the repos
     var onRepos = function (data) {
-        
 
         $scope.repos = data;
 
