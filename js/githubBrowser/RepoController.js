@@ -10,8 +10,10 @@
             $scope.loading = null;
 
   
-            var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors';
-            
+            // var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors';
+
+            var langURL = "https://damp-garden-90999.herokuapp.com/contributorstats?user=" + username + '&reponame=' + reponame;
+
             //Statistics come back with 202 status code while github computes
             // Poll until status is 200
              var doPoll = function () {
@@ -26,9 +28,6 @@
                     });
                 }
                 doPoll();
-
-
-
         }; //end onContributors
 
         var onStats = function (data) {
@@ -101,7 +100,6 @@
 
         $scope.loading = "loading";
 
-
         /* Convert unix time from github api to date */
         function timeConverter(UNIX_timestamp) {
             var a = new Date(UNIX_timestamp * 1000);
@@ -122,8 +120,6 @@
                 return n + (s[(v - 20) % 10] || s[v] || s[0]);
             }
         }
-
-
 
     });
     /* End Repo Controller*/

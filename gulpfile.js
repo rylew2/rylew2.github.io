@@ -47,7 +47,7 @@ gulp.task('connect', function () {
 
 
 
-gulp.task('watch', function () {
+ gulp.task('watch', function () {
     gulp.watch(jsSources, ['js']);
 });
 
