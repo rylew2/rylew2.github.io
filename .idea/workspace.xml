@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c557550-1e89-4103-bade-cb9d051a8df6" name="Default" comment="Push test from webstorm">
+    <list default="true" id="9c557550-1e89-4103-bade-cb9d051a8df6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/githubBrowser/RepoController.js" afterPath="$PROJECT_DIR$/js/githubBrowser/RepoController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/githubBrowser/UserController.js" afterPath="$PROJECT_DIR$/js/githubBrowser/UserController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/githubBrowser/githubService.js" afterPath="$PROJECT_DIR$/js/githubBrowser/githubService.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -289,12 +285,20 @@
       <updated>1493587583097</updated>
       <workItem from="1493587584234" duration="2620000" />
       <workItem from="1493594051482" duration="49000" />
-      <workItem from="1495267012959" duration="11777000" />
+      <workItem from="1495267012959" duration="12460000" />
     </task>
+    <task id="LOCAL-00001" summary="update api to use heroku">
+      <created>1495304093752</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1495304093752</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14446000" />
+    <option name="totallyTimeSpent" value="15129000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -347,7 +351,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Push test from webstorm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Push test from webstorm" />
+    <MESSAGE value="update api to use heroku" />
+    <option name="LAST_COMMIT_MESSAGE" value="update api to use heroku" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
