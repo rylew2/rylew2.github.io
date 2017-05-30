@@ -11,8 +11,8 @@
         .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
         // Pages
         .when("/about", { templateUrl: "partials/about.html", controller: "PageCtrl" })
-        .when("/projects", { templateUrl: "partials/projects.html", controller: "PageCtrl" })
-        .when("/places", { templateUrl: "partials/places.html", controller: "PageCtrl" })
+         .when("/projects", { templateUrl: "partials/projects.html", controller: "PageCtrl" })
+         .when("/places", { templateUrl: "partials/places.html", controller: "PageCtrl" })
         .when("/contact", { templateUrl: "partials/contact.html", controller: "PageCtrl" })
 
             //GitHub Viewer
