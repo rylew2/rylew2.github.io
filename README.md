@@ -1,6 +1,11 @@
-My Personal Website
+Personal Website
 ====================
-rylew.co
+
+```
+npm install
+gulp
+```
+
 
 -My Projects <br/>
 -Places I've been <br/>
