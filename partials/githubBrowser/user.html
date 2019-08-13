@@ -33,7 +33,8 @@
 
     </div>
     <div class="loading" ng-show="loading!=null && error==null"> <!--ng-show="loading!=null" >-->
-        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>
+<!--        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>-->
+        <img src="../../img/pacmanloading.gif" style="padding-left:50%; padding-top:2%"/>
     </div>
     <span ng-show="error!=null">
         <p  style="color:red">{{error}}</p>
@@ -42,7 +43,7 @@
     <div class="ghvmain" ng-hide="loading!=null">
         <img src="/img/favicon.ico" style="float:left; height:40px" />
         <h1>ngular GitHub Browser</h1> <br />
-        <a href="#ghv/main" >Back to Search</a>
+        <a href="#ghv/main" > &lt; Back to Search</a>
 
                 <p ng-show="user.message">{{user.message}}</p>
                 <h2> GitHub username: {{user.login}}</h2>
@@ -81,7 +82,7 @@
                             </tr>
                         </tbody>
                     </table> <br />
-                    <p style="font-size:smaller; width: 320px">Select a repository row above to view language breakdown. <br />Click the repository name to view more details.</p>
+                    <b><p style="font-size:smaller; width: 320px">Select a repository row above to view language breakdown. <br />Click the repository name to view more details.</p></b>
 
                 </div>    <!--end Repo table-->
                 
@@ -96,7 +97,7 @@
             <!-- User bio-->
             <div class="row bottomChartRow">
                 <div class="col-lg-3 stats" style="border: 1px solid black; width: 290px">
-                    <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto img-responsive img-rounded " style="width:250px" />
+                    <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto img-responsive img-rounded" style="width:250px" />
                     <p ng-show="user.name">{{user.name}}</p>
                     <p ng-show="user.company"> Company: {{user.company}}</p>
                     <p ng-show="user.location">{{user.location}}</p>

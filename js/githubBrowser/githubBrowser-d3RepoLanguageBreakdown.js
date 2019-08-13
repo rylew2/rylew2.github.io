@@ -116,13 +116,25 @@ function change(data) {
 
     /* ------- TEXT LABELS -------*/
 
+    var getAngle = function (d) {
+        return (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
+    };
+
     var text = svg.select(".labelName").selectAll("text")
         .data(pie(data), function (d) { return d.data.label })
 	  .attr("dy", ".35em")
 	  .attr('text-anchor', 'middle')
 	  .text(function (d) { return (d.data.cars > 10000) ? d.data.make : null; });
 
-        
+    var getAngle = function (d) {
+        return (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
+    };
+
+
+
+// Possible fix - but couldn't get working, didn't spend alot of time on it tho  - RL 8/12/19
+// https://stackoverflow.com/questions/14534024/preventing-overlap-of-text-in-d3-pie-chart
+
     text.enter()
         .append("text")
         .attr("dy", ".35em")

@@ -26,7 +26,7 @@
     </div>
     <div class="loading" ng-show="loading!=null">
         <!--ng-show="loading!=null" >-->
-        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%" />
+        <img src="../../img/pacmanloading.gif" style="padding-left:50%; padding-top:2%" />
     </div>
     <div class="ghvmain col-lg-12" ng-hide="loading!=null">
         <img src="/img/favicon.ico" style="float:left; height:40px" />
@@ -73,7 +73,7 @@
             <h4  ng-show="chartMessage && statUserCount>0">Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since {{firstDate}}</h4>
 
             <h4 ng-show="chartMessage==null && contributorTotal>0">Waiting for GitHub to compute statistics...</h4>
-            <img ng-show="chartMessage==null && contributorTotal>0" src="../../img/gears.svg" style="" />
+            <img ng-show="chartMessage==null && contributorTotal>0" src="../../img/pacmanloading.gif" style="" />
 
            
         </div>
