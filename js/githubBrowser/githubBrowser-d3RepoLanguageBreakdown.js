@@ -140,7 +140,6 @@ function change(data) {
         .attr("dy", ".35em")
         .text(function (d) {
             return (d.data.label + ": " + d.value + "%");
-
         })
          .selectAll("text")
             .style("text-anchor", "end")
