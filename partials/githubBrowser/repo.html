@@ -1,85 +1,106 @@
-
-<link rel="stylesheet" type="text/css" href="/css/githubBrowser/repoStackedBarChart.css">
-
-
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/githubBrowser/repoStackedBarChart.css"
+/>
 
 <div class="container">
-    <div class="row">
-
-        <div class="col-lg-12 ">
-            <h1 class="page-header">
-                Projects
-            </h1>
-            <ol class="breadcrumb">
-                <li>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Projects</h1>
+      <ol class="breadcrumb">
+        <!-- <li>
                     <a href="../index.html">Home</a>
                 </li>
                 <li class="active">
                     <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                    Github Browser: Repository
-                </li>
-            </ol>
-        </div>
-
+                </li> -->
+        <li>Github Browser: Repository</li>
+      </ol>
     </div>
-    <div class="loading" ng-show="loading!=null">
-        <!--ng-show="loading!=null" >-->
-        <img src="../../img/pacmanloading.gif" style="padding-left:50%; padding-top:2%" />
+  </div>
+  <div class="loading" ng-show="loading!=null">
+    <!--ng-show="loading!=null" >-->
+    <img
+      src="../../img/pacmanloading.gif"
+      style="padding-left: 50%; padding-top: 2%"
+    />
+  </div>
+  <div class="ghvmain col-lg-12" ng-hide="loading!=null">
+    <img src="/img/favicon.ico" style="float: left; height: 40px" />
+    <h1>ngular GitHub Browser</h1>
+    <br />
+    <a href="#/ghv/main">Back to Search</a> |
+    <a href="#/ghv/user/{{repo.owner.login}}"
+      >Back to {{repo.owner.login}}'s profile</a
+    >
+
+    <h2>{{repo.name}}</h2>
+
+    <div>
+      <span ng-show="repo.open_issues_count"
+        >Open Issues: {{repo.open_issues_count}}
+      </span>
+      <span ng-show="repo.open_issues_count && repo.watchers">|</span>
+      <span ng-show="repo.watchers">Watchers: {{repo.watchers}} </span
+      ><span ng-show="repo.forks && repo.watchers">|</span>
+      <span ng-show="repo.forks">Forks: {{repo.watchers}} </span>
     </div>
-    <div class="ghvmain col-lg-12" ng-hide="loading!=null">
-        <img src="/img/favicon.ico" style="float:left; height:40px" />
-        <h1>ngular GitHub Browser</h1> <br />
-        <a href="#/ghv/main">Back to Search</a> |
-        <a href="#/ghv/user/{{repo.owner.login}}">Back to {{repo.owner.login}}'s profile</a>
 
-        <h2>{{repo.name}}</h2>
+    <br />
 
-        <div>
-            <span ng-show="repo.open_issues_count">Open Issues: {{repo.open_issues_count}} </span> <span ng-show="repo.open_issues_count && repo.watchers">|</span>
-            <span ng-show="repo.watchers">Watchers: {{repo.watchers}} </span><span ng-show="repo.forks && repo.watchers">|</span>
-            <span ng-show="repo.forks">Forks: {{repo.watchers}} </span>
+    <h3 ng-if="contributorTotal < 1">{{contributorTotal}} Contributors :(</h3>
+    <p ng-if="contributorTotal < 1">
+      GitHub needs at least one non-empty commit to show stats.
+    </p>
+    <h3 ng-if="contributorTotal == 1">Only {{contributorTotal}} Contributor</h3>
+    <h3 ng-if="contributorTotal > 1 && contributorTotal < 30">
+      Just {{contributorTotal}} Contributors
+    </h3>
+    <h3 ng-if="contributorTotal >=30">Top {{contributorTotal}} Contributors</h3>
+    <table border=".5" class="col-md-3">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Image</th>
+          <th>Total Commits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in repo.contributors" class="{{user.login}}">
+          <td><a href="#ghv/user/{{user.login}}">{{user.login}}</a></td>
+          <td>
+            <img
+              width="150px"
+              ng-src="{{user.avatar_url}}"
+              title="{{user.login}}"
+            />
+          </td>
+          <td>{{user.contributions}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-        </div>
+    <div id="chart" class="col-md-9" style="height: 400px; text-align: center">
+      <h4 ng-show="statUserCount==0">No user stats available.</h4>
+      <h4 ng-show="chartMessage && statUserCount>0">
+        Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since
+        {{firstDate}}
+      </h4>
 
-        <br />
-
-        <h3 ng-if="contributorTotal < 1"> {{contributorTotal}} Contributors :(  </h3> <p ng-if="contributorTotal < 1">GitHub needs at least one non-empty commit to show stats.</p>
-        <h3 ng-if="contributorTotal == 1"> Only {{contributorTotal}} Contributor </h3>
-        <h3 ng-if="contributorTotal > 1 && contributorTotal < 30">Just {{contributorTotal}} Contributors </h3>
-        <h3 ng-if="contributorTotal >=30">Top {{contributorTotal}} Contributors </h3>
-        <table border=".5" class="col-md-3" >
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Image</th>
-                    <th>Total Commits</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in repo.contributors" class="{{user.login}}">
-                    <td><a href="#ghv/user/{{user.login}}">{{user.login}}</a></td>
-                    <td>
-                        <img width="150px" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
-                    </td>
-                    <td>{{user.contributions}}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div id="chart" class="col-md-9" style="height:400px; text-align:center">
-            <h4 ng-show="statUserCount==0">No user stats available.</h4>
-            <h4  ng-show="chartMessage && statUserCount>0">Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since {{firstDate}}</h4>
-
-            <h4 ng-show="chartMessage==null && contributorTotal>0">Waiting for GitHub to compute statistics...</h4>
-            <img ng-show="chartMessage==null && contributorTotal>0" src="../../img/pacmanloading.gif" style="" />
-
-           
-        </div>
-
+      <h4 ng-show="chartMessage==null && contributorTotal>0">
+        Waiting for GitHub to compute statistics...
+      </h4>
+      <img
+        ng-show="chartMessage==null && contributorTotal>0"
+        src="../../img/pacmanloading.gif"
+        style=""
+      />
     </div>
+  </div>
 </div>
 
-
-<script src="../../js/githubBrowser/githubBrowser-d3RepoStats.js" type="text/javascript"></script>
+<script
+  src="../../js/githubBrowser/githubBrowser-d3RepoStats.js"
+  type="text/javascript"
+></script>

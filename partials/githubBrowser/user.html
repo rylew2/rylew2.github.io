@@ -1,123 +1,157 @@
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/githubBrowser/githubBrowser-donutChart.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/githubBrowser/githubBrowser-barChart.css"
+/>
 
-
-<link rel="stylesheet" type="text/css" href="/css/githubBrowser/githubBrowser-donutChart.css">
-<link rel="stylesheet" type="text/css" href="/css/githubBrowser/githubBrowser-barChart.css">
-
-
-<script src="/js/githubBrowser/githubBrowser-d3RepoLanguageBreakdown.js" type="text/javascript"></script>
-<script src="/js/githubBrowser/githubBrowser-d3LanguageTotals.js" type="text/javascript"></script>
-
-
+<script
+  src="/js/githubBrowser/githubBrowser-d3RepoLanguageBreakdown.js"
+  type="text/javascript"
+></script>
+<script
+  src="/js/githubBrowser/githubBrowser-d3LanguageTotals.js"
+  type="text/javascript"
+></script>
 
 <div class="container center-block">
-    <div class="row">
-
-        <div class="col-lg-12 ">
-            <h1 class="page-header">
-                Projects
-
-            </h1>
-            <ol class="breadcrumb">
-                <li>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Projects</h1>
+      <ol class="breadcrumb">
+        <!-- <li>
                     <a href="../index.html">Home</a>
                 </li>
                 <li >
                     <a href="#/projects">Projects</a>
-                </li>
-                <li>
-                    Github Browser: Top User Repositories
-                  
-                </li>
-            </ol>
-        </div>
-
+                </li> -->
+        <li>Github Browser: Top User Repositories</li>
+      </ol>
     </div>
-    <div class="loading" ng-show="loading!=null && error==null"> <!--ng-show="loading!=null" >-->
-<!--        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>-->
-        <img src="../../img/pacmanloading.gif" style="padding-left:50%; padding-top:2%"/>
+  </div>
+  <div class="loading" ng-show="loading!=null && error==null">
+    <!--ng-show="loading!=null" >-->
+    <!--        <img src="../../img/gears.svg" style="padding-left:50%; padding-top:2%"/>-->
+    <img
+      src="../../img/pacmanloading.gif"
+      style="padding-left: 50%; padding-top: 2%"
+    />
+  </div>
+  <span ng-show="error!=null">
+    <p style="color: red">{{error}}</p>
+    <a href="#ghv/main">Back to Search</a>
+  </span>
+  <div class="ghvmain" ng-hide="loading!=null">
+    <img src="/img/favicon.ico" style="float: left; height: 40px" />
+    <h1>ngular GitHub Browser</h1>
+    <br />
+    <a href="#ghv/main"> &lt; Back to Search</a>
+
+    <p ng-show="user.message">{{user.message}}</p>
+    <h2>GitHub username: {{user.login}}</h2>
+    <h4>
+      Top {{ (repos | toArray | orderBy:repoSortOrder | limitTo: 10).length }}
+      Repositories
+    </h4>
+
+    <!--Repo table-->
+    <div class="row topChartRow">
+      <div class="col-lg-3" style="padding-left: 0px !important">
+        <table border=".5" ng-show="user" style="width: 352px" class="">
+          <thead>
+            <tr>
+              <th>Repository Name</th>
+              <th>Stars</th>
+              <th style="width: 320px; display: none">
+                Select to View Languages Used
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="repo in repos | toArray |  orderBy:repoSortOrder | limitTo: 10"
+              ng-click="changeRepo($event)"
+            >
+              <td>
+                <a
+                  href="#ghv/repo/{{user.login}}/{{repo.name}}"
+                  data-target="#ghv/repo/"
+                >
+                  {{repo.name}}
+                </a>
+              </td>
+              <td>{{repo.stargazers_count | number}}</td>
+              <!-- number filter -->
+              <!--<td>{{repo.language}}</td>-->
+              <td style="display: none">
+                <input
+                  type="radio"
+                  class="languageRB"
+                  name="dataset"
+                  id="dataset"
+                  value="{{repo.name}}"
+                  <!--ng-click="changeRepo()"
+                  --
+                />
+                ng-checked="mycheck" />
+                <span
+                  class="languageSPAN"
+                  style="display: none"
+                  ng-repeat="(key,value) in repo.languages"
+                  data-key="{{key}}"
+                  data-value="{{value}}"
+                ></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <b
+          ><p style="font-size: smaller; width: 320px">
+            Select a repository row above to view language breakdown.
+            <br />Click the repository name to view more details.
+          </p></b
+        >
+      </div>
+      <!--end Repo table-->
+
+      <div id="chart" class="col-lg-9">
+        <h4 style="text-align: center" ng-show="chartMessage==null">
+          Language Breakdown for {{thisRepo}}
+        </h4>
+        <div style="text-align: center">{{chartMessage}}</div>
+      </div>
     </div>
-    <span ng-show="error!=null">
-        <p  style="color:red">{{error}}</p>
-        <a  href="#ghv/main">Back to Search</a>
-    </span>
-    <div class="ghvmain" ng-hide="loading!=null">
-        <img src="/img/favicon.ico" style="float:left; height:40px" />
-        <h1>ngular GitHub Browser</h1> <br />
-        <a href="#ghv/main" > &lt; Back to Search</a>
 
-                <p ng-show="user.message">{{user.message}}</p>
-                <h2> GitHub username: {{user.login}}</h2>
-                <h4>Top {{ (repos | toArray |  orderBy:repoSortOrder | limitTo: 10).length }} Repositories</h4>
+    <!-- User bio-->
+    <div class="row bottomChartRow">
+      <div class="col-lg-3 stats" style="border: 1px solid black; width: 290px">
+        <img ng-src="{{user.avatar_url}}" title="{{user.name}}
+        class="ghvuserphoto ghvphoto img-responsive img-rounded"
+        style="width:250px" />
+        <p ng-show="user.name">{{user.name}}</p>
+        <p ng-show="user.company">Company: {{user.company}}</p>
+        <p ng-show="user.location">{{user.location}}</p>
+        <p ng-show="user.blog">
+          <a ng-href="{{user.blog}}" target="_blank">{{user.blog}}</a>
+        </p>
+        <p ng-show="user.bio">{{user.bio}}</p>
+      </div>
+      <!--end  User bio-->
 
-
-
-        <!--Repo table-->
-        <div class="row topChartRow">
-                <div class="col-lg-3" style="padding-left:0px !important">
-                    <table border=".5" ng-show="user" style="width:352px;" class="">
-                        <thead>
-                            <tr>
-                                <th>Repository Name</th>
-                                <th>Stars</th>
-                                <th style="width:320px; display:none">Select to View Languages Used</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <tr ng-repeat="repo in repos | toArray |  orderBy:repoSortOrder | limitTo: 10" ng-click="changeRepo($event)">
-
-                                <td>
-                                    <a href="#ghv/repo/{{user.login}}/{{repo.name}}" data-target="#ghv/repo/">
-                                        {{repo.name}}
-                                    </a>
-                                </td>
-                                <td>{{repo.stargazers_count | number}}</td>
-                                <!-- number filter -->
-                                <!--<td>{{repo.language}}</td>-->
-                                <td style="display:none">
-                                    <input type="radio" class="languageRB" name="dataset" id="dataset" value="{{repo.name}}" <!--ng-click="changeRepo()"--> ng-checked="mycheck" />
-                                    <span class="languageSPAN" style="display:none" ng-repeat="(key,value) in repo.languages" data-key="{{key}}" data-value="{{value}}"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table> <br />
-                    <b><p style="font-size:smaller; width: 320px">Select a repository row above to view language breakdown. <br />Click the repository name to view more details.</p></b>
-
-                </div>    <!--end Repo table-->
-                
-                <div id="chart" class="col-lg-9">
-                    <h4 style="text-align:center" ng-show="chartMessage==null">Language Breakdown for {{thisRepo}}</h4>
-                    <div style="text-align:center">{{chartMessage}}</div>
-                </div>
-            </div>
-
-
-
-            <!-- User bio-->
-            <div class="row bottomChartRow">
-                <div class="col-lg-3 stats" style="border: 1px solid black; width: 290px">
-                    <img ng-src="{{user.avatar_url}}" title="{{user.name}} class="ghvuserphoto ghvphoto img-responsive img-rounded" style="width:250px" />
-                    <p ng-show="user.name">{{user.name}}</p>
-                    <p ng-show="user.company"> Company: {{user.company}}</p>
-                    <p ng-show="user.location">{{user.location}}</p>
-                    <p ng-show="user.blog"><a ng-href="{{user.blog}}">{{user.blog}}</a></p>
-                    <p ng-show="user.bio"> {{user.bio}}</p>
-
-                </div>  <!--end  User bio-->
-
-
-
-                <div class="col-lg-9 barChartOuterDiv">
-                    <div class="barChart">
-                        <h4>Total Lines of Code by Language among Top {{langTotalCount}} Repositories for {{user.name}}</h4>
-                        <p><span id="city"></span> - <span id="inches"></span></p>
-                    </div>
-                </div>
-            </div>
+      <div class="col-lg-9 barChartOuterDiv">
+        <div class="barChart">
+          <h4>
+            Total Lines of Code by Language among Top {{langTotalCount}}
+            Repositories for {{user.name}}
+          </h4>
+          <p><span id="city"></span> - <span id="inches"></span></p>
         </div>
-
-    
- </div>
-
-
+      </div>
+    </div>
+  </div>
+</div>
