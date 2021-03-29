@@ -57,44 +57,50 @@
       Just {{contributorTotal}} Contributors
     </h3>
     <h3 ng-if="contributorTotal >=30">Top {{contributorTotal}} Contributors</h3>
-    <table border=".5" class="col-md-3">
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Image</th>
-          <th>Total Commits</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="user in repo.contributors" class="{{user.login}}">
-          <td><a href="#ghv/user/{{user.login}}">{{user.login}}</a></td>
-          <td>
-            <img
-              width="150px"
-              ng-src="{{user.avatar_url}}"
-              title="{{user.login}}"
-            />
-          </td>
-          <td>{{user.contributions}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="mainRepoContent" style="display: flex">
+      <table border=".5" class="col-md-3">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Image</th>
+            <th>Total Commits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in repo.contributors" class="{{user.login}}">
+            <td><a href="#ghv/user/{{user.login}}">{{user.login}}</a></td>
+            <td>
+              <img
+                width="150px"
+                ng-src="{{user.avatar_url}}"
+                title="{{user.login}}"
+              />
+            </td>
+            <td>{{user.contributions}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div id="chart" class="col-md-9" style="height: 400px; text-align: center">
-      <h4 ng-show="statUserCount==0">No user stats available.</h4>
-      <h4 ng-show="chartMessage && statUserCount>0">
-        Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since
-        {{firstDate}}
-      </h4>
+      <div
+        id="chart"
+        class="col-md-9"
+        style="height: 400px; text-align: center"
+      >
+        <h4 ng-show="statUserCount==0">No user stats available.</h4>
+        <h4 ng-show="chartMessage && statUserCount>0">
+          Top {{statUserCount}} File Adders/Deleters {{thisRepo}} since
+          {{firstDate}}
+        </h4>
 
-      <h4 ng-show="chartMessage==null && contributorTotal>0">
-        Waiting for GitHub to compute statistics...
-      </h4>
-      <img
-        ng-show="chartMessage==null && contributorTotal>0"
-        src="../../img/pacmanloading.gif"
-        style=""
-      />
+        <h4 ng-show="chartMessage==null && contributorTotal>0">
+          Waiting for GitHub to compute statistics...
+        </h4>
+        <img
+          ng-show="chartMessage==null && contributorTotal>0"
+          src="../../img/pacmanloading.gif"
+          style=""
+        />
+      </div>
     </div>
   </div>
 </div>
