@@ -12,7 +12,7 @@
   
             // var langURL = "https://api.github.com/repos/" + username + "/" + reponame + '/stats/contributors';
 
-            var langURL = "https://github-browser-express-backend.vercel.app/contributorstats?user=" + username + '&reponame=' + reponame;
+            var langURL = "https://github-browser-express-backend.vercel.app/api/contributorstats?user=" + username + '&reponame=' + reponame;
 
             //Statistics come back with 202 status code while github computes
             // Poll until status is 200

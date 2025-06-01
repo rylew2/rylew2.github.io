@@ -3,7 +3,7 @@
   var github = function ($http) {
     
     // Single base URL for your custom API
-    var apiBase = "https://github-browser-express-backend.vercel.app";
+    var apiBase = "https://github-browser-express-backend.vercel.app/api";
     
     // Return GitHub user profile
     var getUser = function (username) {
