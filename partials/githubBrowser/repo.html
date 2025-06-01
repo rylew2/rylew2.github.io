@@ -9,25 +9,17 @@
     <div class="col-lg-12">
       <h1 class="page-header">Angular GitHub Browser</h1>
       <ol class="breadcrumb">
-        <!-- <li>
-                    <a href="../index.html">Home</a>
-                </li>
-                <li class="active">
-                    <a href="#/projects">Projects</a>
-                </li> -->
         <li>Github Browser: Repository</li>
       </ol>
     </div>
   </div>
   <div class="loading" ng-show="loading!=null">
-    <!--ng-show="loading!=null" >-->
     <img
       src="../../img/pacmanloading.gif"
       style="padding-left: 50%; padding-top: 2%"
     />
   </div>
   <div class="ghvmain col-lg-12" ng-hide="loading!=null">
-    <!-- <h1>Angular GitHub Browser</h1> -->
     <br />
     <a href="#/ghv/main">Back to Search</a> |
     <a href="#/ghv/user/{{repo.owner.login}}"
