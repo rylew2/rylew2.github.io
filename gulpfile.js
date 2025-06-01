@@ -1,13 +1,6 @@
 ﻿var gulp = require("gulp"),
-  // gutil = require('gulp-util'),
   browserify = require("gulp-browserify"),
   connect = require("gulp-connect"),
-  // gulpif = require('gulp-if'),
-  // uglify = require('gulp-uglify'),
-  // minifyHTML = require('gulp-minify-html'),
-  // jsonminify = require('gulp-jsonminify'),
-  // imagemin = require('gulp-imagemin'),
-  // pngcrush = require('imagemin-pngcrush'),
   concat = require("gulp-concat");
 
 var env, jsSources, sassSources, htmlSources, jsonSources, outputDir, sassStyle;
@@ -42,8 +35,6 @@ gulp.task("connect", function () {
 gulp.task("watch", function () {
   gulp.watch(jsSources, ["js"]);
 });
-
-// gulp.task('default', ['connect', 'watch']);
 
 //upgrade for gulp 4.0
 gulp.task("default", gulp.series("connect", "watch"));
